@@ -80,7 +80,7 @@ With body:
       "token": "j23hk4j2h3kj4h...",
       "content": "Message",
       "content_type": "text", // "image/jpeg", "image/png", "video/mp4", "audio/ogg"
-      "file": { // If content_type different of text
+      "attachment": { // If content_type different of text
         "url": "https://images.com/image.png",
         "size": "1.0MB" //Optional
       }
