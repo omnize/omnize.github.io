@@ -1,14 +1,4 @@
 ## Omnize Agent SDK V1
-To get access token access:
-
-    https://app.omnize.com.br
-
-Go to:
-
-    Menu > Settings > Integrations > ClientSDK
-
-Click on 'Generate Token' to obtain a new one.
-
 #### Authenticate user
 Make HTTP request:
 
@@ -33,7 +23,7 @@ Response:
 
     <script src="https://omnizeagentsdk.omnize.com.br/sdk.min.js" type="text/javascript"></script>
 
-####  Insantiate sdk passing agent token:
+####  Instantiate sdk passing agent token:
 
     const sdk = new OmnizeAgentSDK(token)
 
@@ -159,3 +149,100 @@ Response:
 #### Transfer phone interaction to agent:
 
     sdk.transferPhoneToAgent(interactionHash)
+
+## API methods
+
+#### Get interaction info:
+
+        sdk.getInteractionInfo(callback);
+
+- Response
+
+        {
+            "status": 200,
+            "success": true,
+            "data": {
+                "parsed_messages": [{"type", "id", "content"}],
+                "customer": {"customerKey", "id", "historyCount", "firstContact", "fields"},
+                "info": {},
+                "tags": [{"id", "name", "state", "dateCreation", "baseColor", "agent": {"name", "photo"}, "count"}],
+                "note": ""
+            }
+        }
+
+#### Get departments/agents list to transfer interaction:
+
+        sdk.getTransferList(callback);
+
+- Response
+
+        {
+            message: "Success",
+            status: 200,
+            result: {
+                agents: [...],
+                departments: [...]
+            }
+        }
+
+#### Get tags:
+
+        sdk.getTags(callback);
+
+- Response
+
+        {
+            status: 200,
+            tags: [...],
+            total: {...}
+        }
+
+#### Get/Search shotcuts:
+
+        sdk.getShortcuts(search, callback);
+
+- Response
+
+        {
+            status: 200,
+            shortcuts: [...]
+        }
+
+#### Get interactions count:
+
+        sdk.getQueue(limit, page)
+
+Response:
+
+        {
+            "interactions": [],
+            "status":200,
+            "success":true
+        }
+
+#### Get queue interactions:
+
+        sdk.getInbox(limit, page, search)
+
+Response:
+
+        {
+            "interactions": [],
+            "status":200,
+            "success":true
+        }
+
+
+#### Get inbox interactions:
+
+        sdk.getCount()
+
+Response:
+
+        {
+            "inbox": 2,
+            "queue":2,
+            "status":200,
+            "success":true,
+            "total":4
+        }
