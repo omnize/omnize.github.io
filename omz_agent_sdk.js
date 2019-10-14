@@ -1081,6 +1081,8 @@ var OmnizeVish = function (token) {
   this.accountId;
   this.agentId;
   this.pendingRequests = [];
+  this.apiUrl = "https://services.omnize.com.br";
+  this.msUrl = "https://microservices.omnize.com.br/interactions";
 };
 
 function parseJwt(token) {
@@ -1278,7 +1280,25 @@ OmnizeVish.prototype = {
   },
   // API functions
   getTransferList: function (callback) {
-    makeRequest("GET", "http://localhost:3000/accounts/3373/transference", this.token, callback);
+    makeRequest("GET", `${this.apiUrl}/accounts/${this.accountId}/transference`, this.token, callback);
+  },
+  getTags: function (callback) {
+    makeRequest("GET", `${this.apiUrl}/tags?accountId=${this.accountId}`, this.token, callback);
+  },
+  getShortcuts: function (search = '', callback) {
+    makeRequest("GET", `${this.apiUrl}/shortcuts/search/${search}?accountId=${this.accountId}`, this.token, callback);
+  },
+  getInteractionInfo: function (interactionHash, callback) {
+    makeRequest("GET", `${this.apiUrl}/interactions/${interactionHash}/info?accountId=${this.accountId}&origin=uai`, this.token, callback);
   },
   // MS functions
+  getQueue: function (limit = 20, page = 1, callback) {
+    makeRequest("GET", `${this.msUrl}/queue?timestamp=${Date.now()}&limit=${limit}&page=${page}`, this.token, callback)
+  },
+  getInbox: function (limit = 20, page = 1, search = '', callback) {
+    makeRequest("GET", `${this.msUrl}/inbox?timestamp=${Date.now()}&limit=${limit}&page=${page}&search=${search}`, this.token, callback)
+  },
+  getCount: function (callback) {
+    makeRequest("GET", `${this.msUrl}/count?timestamp=${Date.now()}`, this.token, callback)
+  }
 }
