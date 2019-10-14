@@ -210,7 +210,7 @@ Response:
 
 #### Get interactions count:
 
-        sdk.getQueue(limit, page)
+        sdk.getQueue(limit, page, callback)
 
 Response:
 
@@ -222,7 +222,7 @@ Response:
 
 #### Get queue interactions:
 
-        sdk.getInbox(limit, page, search)
+        sdk.getInbox(limit, page, search, callback)
 
 Response:
 
@@ -235,7 +235,7 @@ Response:
 
 #### Get inbox interactions:
 
-        sdk.getCount()
+        sdk.getCount(callback)
 
 Response:
 
