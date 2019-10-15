@@ -208,7 +208,7 @@ Response:
             shortcuts: [...]
         }
 
-#### Get interactions count:
+#### Get queue interactions:
 
         sdk.getQueue(limit, page, callback)
 
@@ -216,11 +216,11 @@ Response:
 
         {
             "interactions": [],
-            "status":200,
-            "success":true
+            "status": 200,
+            "success": true
         }
 
-#### Get queue interactions:
+#### Get inbox interactions:
 
         sdk.getInbox(limit, page, search, callback)
 
@@ -228,12 +228,12 @@ Response:
 
         {
             "interactions": [],
-            "status":200,
-            "success":true
+            "status": 200,
+            "success": true
         }
 
 
-#### Get inbox interactions:
+#### Get interactions count:
 
         sdk.getCount(callback)
 
@@ -241,8 +241,8 @@ Response:
 
         {
             "inbox": 2,
-            "queue":2,
-            "status":200,
-            "success":true,
-            "total":4
+            "queue": 2,
+            "status": 200,
+            "success": true,
+            "total": 4
         }
