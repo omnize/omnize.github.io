@@ -7,12 +7,19 @@ https://core.omnize.com.br/api/v1/offcontact
 Body
 Parameter | Type | Required | Valid Attributes
 ------------ | ------------- | ------------- | -------------
-content | string | **true** | valid string
+content | string | **true** | any string
 content_type | string | false | audio, image, text, video, file, **(null will be saved as text)**
-department_id | integer | **true** | valid department_id from account
+department_id | integer | **true** | any department_id from account
 token | string | **true** | your clientSdk token
 url | string | false | valid url
-customer | object | **true** | { "phone": "string_optional_unique", "cpf": "string_optional_unique", "name": "string_optional", "email": "string_**required**" }
+customer | object | **true** | { "phone", "cpf", "name", "email" }
+
+Customer Parameter | Type | Required |
+------------ | ------------- | -------------
+phone | string | false
+cpf | string | false
+name | string | false
+email | string | **true**
 
 Example:
 ```
