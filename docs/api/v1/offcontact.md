@@ -5,7 +5,8 @@ Make **POST** HTTP request:
 https://core.omnize.com.br/api/v1/offcontact
 ```
 Body
-Parameter | Type | Required | Valid Attributes
+
+Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | -------------
 content | string | **true** | any string
 content_type | string | false | audio, image, text, video, file, **(null will be saved as text)**
