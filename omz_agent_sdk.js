@@ -1073,7 +1073,7 @@ class Timer {
   }
 }
 
-var OmnizeVish = function (token) {
+var OmnizeAgentSDK = function (token) {
   this.token = token;
   this.websocket;
   this.events = {};
@@ -1109,12 +1109,12 @@ function makeRequest(method = "GET", url, token, callback, params = null) {
   request.send(JSON.stringify(params));
 };
 
-OmnizeVish.prototype = {
+OmnizeAgentSDK.prototype = {
   connect: function () {
     var tokenParams = parseJwt(this.token);
     this.accountId = tokenParams.account.id
     this.agentId = tokenParams.id
-    this.websocket = new Socket("ws://localhost:4000/socket", {
+    this.websocket = new Socket("wss://agentcore.omnize.com.br/socket", {
       params: { user_id: `agents:${this.accountId}:${this.agentId}` }
     })
     this.websocket.connect()
