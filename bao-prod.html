@@ -10,9 +10,9 @@
   <script>
     var cust_id = window.location.hash.slice(1, window.location.hash.length);
     if ((cust_id == undefined) || (cust_id == null) || (cust_id == "")) cust_id = 1;
-    var JSLink = '//wgt.omnize.com.br/main.js',JSElement=document.createElement('script');
-		JSElement.async=!0;JSElement.charset='UTF-8';JSElement.src=JSLink;JSElement.onload=OnceLoaded;document.getElementsByTagName('body')[0].appendChild(JSElement);
-		function OnceLoaded(){if(typeof(omzBao)!=='undefined'){omzBao.init({id:cust_id});}}
+    var JSLink = '//bao.omnize.com.br/main.js',JSElement=document.createElement('script');
+    JSElement.async=!0;JSElement.charset='UTF-8';JSElement.src=JSLink;JSElement.onload=OnceLoaded;document.getElementsByTagName('body')[0].appendChild(JSElement);
+    function OnceLoaded(){if(typeof(omzBao)!=='undefined'){omzBao.init({id:cust_id});}}
   </script>
 </body>
 </html>
