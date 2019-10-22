@@ -14,14 +14,15 @@ Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' 
 Omnize platform: https://homolog.app.omnize.com.br
 Api endpoint: https://homolog.core.omnize.com.br
 ```
+
 #### Get Departments
 Make **GET** HTTP request:
 ```
 https://services.omnize.com.br/api/v1/departments?token={yourClientSdkToken}
 ```
 Parameter  | Required |
-------------  | -------------
-token | **true**
+------------  | ------------- |
+token | **true** |
 
 #### Start interaction
 Make **POST** HTTP request:
@@ -31,13 +32,13 @@ https://core.omnize.com.br/api/v1/interactions
 Body:
 
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
-department_id | integer | **true** | any active department_id from your account
-media_type | string | false | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)**
-extra | object | false | any parameters **(will be returned on webhook)**
-customer | object | false | { "phone", "cpf", "name", "email" }
-external_history | string | false | valid url that GET a JSON
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+department_id | integer | **true** | any active department_id from your account |
+media_type | string | false | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+extra | object | false | any parameters **(will be returned on webhook)** |
+customer | object | false | { "phone", "cpf", "name", "email" } |
+external_history | string | false | valid url that GET a JSON |
 
 Example:
 ```
@@ -79,14 +80,15 @@ Error Response:
 #### External History
 Endpoint that **GET** a JSON:
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-messages | array of objects | **true** | objects with "time", "direction" and "content"
+------------ | ------------- | ------------- | ------------- |
+messages | array of objects | **true** | objects with "time", "direction" and "content" |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-time | datetime | **true** | any datetime
-direction | string | **true** | CLIENT, AGENT
-content | string | **true** | any string
+Messages Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+time | datetime | **true** | any datetime |
+direction | string | **true** | CLIENT, AGENT |
+content | string | **true** | any string |
+
 Example:
 ```
 {
@@ -112,11 +114,12 @@ https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/messages
 ```
 body:
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
-content | string | **true** | any string
-type | string | false | text, image, video, audio, file **(null will be saved as text)**
-Example
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+content | string | **true** | any string |
+type | string | false | text, image, video, audio, file **(null will be saved as text)** |
+
+Example:
 ```
 {
   "token": "yourC1ientSdkT0ken",
@@ -150,8 +153,8 @@ https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/typing
 ```
 body:
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
 #### Notify when client stop typing
 Make **PUT** HTTP request:
@@ -160,8 +163,8 @@ https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/cleared
 ```
 body:
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
 
 #### Finish interaction
@@ -171,8 +174,8 @@ https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/finish
 ```
 body:
 Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
 
 ## Triggers
