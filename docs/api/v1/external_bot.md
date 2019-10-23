@@ -2,111 +2,192 @@
 To activate external bot contact suport
 
 ## For homolog environment
-
+```
     Omnize platform: https://homolog.app.omnize.com.br
 
     Api endpoint: https://homolog.core.omnize.com.br
-    
-    Widget: https://omnize.github.io/wgt-homolog.html#:account_id
+
+    Widget: https://omnize.github.io/wgt-homolog.html#{account_id}
+```
 
 ## Make interaction
 #### Start widget, select a department with bot and click on "Chat"
-Will receive a POST on endpoint with body:
+Will receive a **POST** on bot endpoint with body:
 
-    {
-      "type": "new_interaction",
-      "interaction_hash": ".......",
-      "department_id": 0000
-    }
-    
-#### To accept make HTTP request:
+Parameter | Type | Value |
+------------ | ------------- | ------------- |
+type | string | new_interaction |
+interaction_hash | string | uuid |
+department_id | integer | your department_id |
 
-    PUT https://core.omnize.com.br/api/v1/bot/:interaction_hash/accept
+Example:
+```
+{
+  "type": "new_interaction",
+  "interaction_hash": "0000a-000b-0c00-0d0e-f00d00f11111",
+  "department_id": 1
+}
+```
 
-With body:
+#### Accept
+make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/bot/{interaction_hash}/accept
+```
+body:
 
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
+Parameter | Type | Required | Valid Attribute |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
-Response:
+Valid Response:
+```
+{
+  "message": "Message received successfully",
+  "status": 200
+}
+```
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
 
-    {
-      "message": "Message received successfully",
-      "status": 200
-    }
-    
-#### To finish make HTTP request:
+#### Finish
+make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/bot/{interaction_hash}/finish
+```
+body:
 
-    PUT https://core.omnize.com.br/api/v1/bot/:interaction_hash/finish
+Parameter | Type | Required | Valid Attribute |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
-With body:
+Valid Response:
+```
+{
+  "message": "Message received successfully",
+  "status": 200
+}
+```
+Error Response:
+```
+{
+  "message": "Error description here",
+  "status": 422
+}
 
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
+```
+#### Transfer
+make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/bot/{interaction_hash}/transfer
+```
+body:
 
-Response:
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+department_id | integer | false | any active department_id from your account **(null will be transferred to the department that the interaction started)** |
 
-    {
-      "message": "Message received successfully",
-      "status": 200
-    }
-    
-#### To transfer to department make HTTP request:
+Valid Response:
+```
+{
+  "message": "Message received successfully",
+  "status": 200
+}
+````
+Error Response:
+```
+{
+  "message": "Error description here",
+  "status": 422
+}
+```
 
-    PUT https://core.omnize.com.br/api/v1/bot/:interaction_hash/transfer
+#### Send message
+make **POST** HTTP request:
+```
+https://core.omnize.com.br/api/v1/bot/{interaction_hash}/message
+```
+body:
 
-With body:
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+content | string | **true** | any string |
+content_type | string | false | text, image, video, audio, file **(null will be saved as text)** |
+attachment | object | false | { "url", "size"} |
 
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
 
-Response:
+Attachment Paramenter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+url | string | **true** | valid url |
+size | string | false | any string |
 
-    {
-      "message": "Message received successfully",
-      "status": 200
-    }
+Example:
+```
+{
+  "token": "y0urC1lientT0ken",
+  "content": "your message here",
+  "content_type": "image",
+  "attachment": {
+    "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png",
+    "size": "1.0MB"
+  }
+}
+```
 
-#### To send message make HTTP request:
-
-    POST https://core.omnize.com.br/api/v1/bot/:interaction_hash/message
-
-With body:
-
-    {
-      "token": "j23hk4j2h3kj4h...",
-      "content": "Message",
-      "content_type": "text", // "image/jpeg", "image/png", "video/mp4", "audio/ogg"
-      "attachment": { // If content_type different of text
-        "url": "https://images.com/image.png",
-        "size": "1.0MB" //Optional
-      }
-    }
-
-Response:
-
-    {
-      "message": "Message received successfully",
-      "status": 200
-    }
+Valid Response:
+```
+{
+  "message": "Message received successfully",
+  "status": 200
+}
+```
+Error Response:
+```
+{
+  "message": "Error description here",
+  "status": 422
+}
+```
 
 #### When client send a message
-Will receive a POST on endpoint with body:
+Will receive a **POST** on endpoint with body:
 
-    {
-      "type": "new_message",
-      "interaction_hash": ".......",
-      "content": "Test message",
-      "content_type": "text"
-    }
+Parameter | Type | Value |
+------------ | ------------- | ------------- |
+type | string | new_message |
+interaction_hash | string | uuid |
+content | string | any string |
+content_type | string | text, image, video, audio or file |
+
+Example:
+```
+{
+  "type": "new_message",
+  "interaction_hash": "0000a-000b-0c00-0d0e-f00d00f11111",
+  "content": "Test message",
+  "content_type": "text"
+}
+```
 
 #### When client finishes the interaction
-Will receive a POST on endpoint with body:
+Will receive a **POST** on endpoint with body:
 
-    {
-      "type": "finished_interaction",
-      "interaction_hash": "......."
-    }
+Parameter | Type | Value |
+------------ | ------------- | ------------- |
+type | string | finished_interaction |
+interaction_hash | string | uuid |
+
+Example:
+```
+{
+  "type": "finished_interaction",
+  "interaction_hash": "0000a-000b-0c00-0d0e-f00d00f11111"
+}
+```

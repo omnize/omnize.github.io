@@ -1,131 +1,186 @@
 ## ClientApi V1
 To get access token and set webhook url to receive, access:
-
-    https://app.omnize.com.br
-
+```
+https://app.omnize.com.br
+```
 Go to:
-
-    Menu > Settings > Integrations > ClientSDK
-
+```
+Menu > Settings > Integrations > ClientSDK
+```
 Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
 
 #### For homolog environment
-
-    Omnize platform: https://homolog.app.omnize.com.br
-
-    Api endpoint: https://homolog.core.omnize.com.br
+```
+Omnize platform: https://homolog.app.omnize.com.br
+Api endpoint: https://homolog.core.omnize.com.br
+```
 
 #### Get Departments
-Make HTTP request:
-
-    GET https://services.omnize.com.br/api/v1/departments?token=jh2kj3k12j3hk1j
+Make **GET** HTTP request:
+```
+https://services.omnize.com.br/api/v1/departments?token={yourClientSdkToken}
+```
+Parameter  | Required |
+------------  | ------------- |
+token | **true** |
 
 #### Start interaction
-Make HTTP request:
+Make **POST** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions
+```
+Body:
 
-    POST https://core.omnize.com.br/api/v1/interactions
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+department_id | integer | **true** | any active department_id from your account |
+media_type | string | false | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+extra | object | false | any parameters **(will be returned on webhook)** |
+customer | object | false | { "phone", "cpf", "name", "email" } |
+external_history | string | false | valid url that GET a JSON |
 
-With body:
+Example:
+```
+{
+  "token": "y0urC1ientSdkT0ken",
+  "media_type": "TEXT",
+  "department_id": 1,
+  "customer": {
+    "name": "Name Surname",
+    "email": "nameo@example.com",
+    "phone": "11991417777",
+    "cpf": "12345678900"
+  },
+  "extra" : {
+    "clientId": "any",
+    "botId": "parameter"
+  },
+  "external_history": "https://services.omnize.com.br/api/v1/helpers/external_history"
+}
+```
+Valid Response:
+```
+{
+  "message": "Interaction created successfully",
+  "data": {
+    "interaction_hash": "0000a-000b-0c00-0d0e-f00d00f11111"
+  }
+}
+```
 
-    {
-      "token": "j4hl2kjh34kh2k3jh4...",
-      "media_type": "text",
-      "department_id": "1",
-      "customer": { // Optional
-        "name": "Joao",
-        "email": "joao@example.com",
-        "phone": "11988776655",
-        "cpf": "123.456.789-00"
-      },
-      "extra" : { // Optional, returned on webhook
-        "clientId": "12",
-        "botId": "1111"
-      },
-	  "external_history": "chathistory.example.org" // Optional
-    }
-
-Response:
-
-    {
-      "message": "Interaction created successfully",
-      "data": {
-        "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213"
-      }
-    }
-    
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
 
 #### External History
-Endpoint that returns a JSON:
+Endpoint that **GET** a JSON:
 
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+messages | array of objects | **true** | objects with "time", "direction" and "content"|
+
+Messages Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+time | datetime | **true** | any datetime |
+direction | string | **true** | CLIENT, AGENT |
+content | string | **true** | any string |
+
+Example:
+```
+{
+  "messages":[
     {
-      "messages":[
-        {
-          "time":"2019-03-14 09:49:11",
-          "direction":"CLIENT",
-          "content":"test"
-        },{
-          "time":"2019-03-14 09:49:01",
-          "direction":"AGENT",
-          "content":"test"
-        }
-      ]
+      "time":"2019-03-14 00:00:01",
+      "direction":"CLIENT",
+      "content":"client message here"
+    },
+    {
+      "time":"2019-03-14 00:00:10",
+      "direction":"AGENT",
+      "content":"agent answer here"
     }
+  ]
+}
+```
 
 #### Send message
-Make HTTP request:
+Make **POST** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/messages
+```
+body:
 
-    POST https://core.omnize.com.br/api/v1/interactions/:interaction_hash/messages
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
+content | string | **true** | any string |
+type | string | false | text, image, video, audio, file **(null will be saved as text)** |
 
-With body:
-
-    {
-      "token": "j23hk4j2h3kj4h...",
-      "content": "Message",
-      "type": "text", // "image/jpeg", "image/png", "video/mp4", "audio/ogg"
-      "url": "https://images.com/image.png", // Optional
-    }
-
-Response:
-
-    {
-      "message": "Message created successfully",
-      "data": {
-        "message_hash": "3110a5da-87c7-4f6d-a4ab-2b1ed5edfd46"
-      }
-    }
+Example:
+```
+{
+  "token": "yourC1ientSdkT0ken",
+  "content": "your message",
+  "type": "image",
+  "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png"
+}
+```
+Valid Response:
+```
+{
+    "data": {
+        "interaction_hash": "interaction_hash"
+    },
+    "message": "Message created successfully",
+    "status": 200
+}
+```
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
 
 #### Notify when client typing
-Make HTTP request:
+Make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/typing
+```
+body:
 
-    PUT https://core.omnize.com.br/api/v1/interactions/:interaction_hash/typing
-
-With body:
-
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
 #### Notify when client stop typing
-Make HTTP request:
+Make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/cleared
+```
+body:
 
-    PUT https://core.omnize.com.br/api/v1/interactions/:interaction_hash/cleared
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
-With body:
-
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
 
 #### Finish interaction
-Make HTTP request:
+Make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/finish
+```
+body:
 
-    PUT https://core.omnize.com.br/api/v1/interactions/:interaction_hash/finish
-
-With body:
-
-    {
-      "token": "j23hk4j2h3kj4h..."
-    }
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token |
 
 
 ## Triggers
