@@ -79,9 +79,10 @@ Error Response:
 
 #### External History
 Endpoint that **GET** a JSON:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
-messages | array of objects | **true** | objects with "time", "direction" and "content" |
+messages | array of objects | **true** | objects with "time", "direction" and "content"|
 
 Messages Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
@@ -113,6 +114,7 @@ Make **POST** HTTP request:
 https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/messages
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -152,6 +154,7 @@ Make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/typing
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -162,6 +165,7 @@ Make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/cleared
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -173,6 +177,7 @@ Make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/finish
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |

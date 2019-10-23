@@ -13,6 +13,7 @@ To activate external bot contact suport
 ## Make interaction
 #### Start widget, select a department with bot and click on "Chat"
 Will receive a **POST** on bot endpoint with body:
+
 Parameter | Type | Value |
 ------------ | ------------- | ------------- |
 type | string | new_interaction |
@@ -34,6 +35,7 @@ make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/bot/{interaction_hash}/accept
 ```
 body:
+
 Parameter | Type | Required | Valid Attribute |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -59,6 +61,7 @@ make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/bot/{interaction_hash}/finish
 ```
 body:
+
 Parameter | Type | Required | Valid Attribute |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -84,6 +87,7 @@ make **PUT** HTTP request:
 https://core.omnize.com.br/api/v1/bot/{interaction_hash}/transfer
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
@@ -110,12 +114,14 @@ make **POST** HTTP request:
 https://core.omnize.com.br/api/v1/bot/{interaction_hash}/message
 ```
 body:
+
 Parameter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
 token | string | **true** | your clientSdk token |
 content | string | **true** | any string |
 content_type | string | false | text, image, video, audio, file **(null will be saved as text)** |
 attachment | object | false | { "url", "size"} |
+
 
 Attachment Paramenter | Type | Required | Valid Attributes |
 ------------ | ------------- | ------------- | ------------- |
@@ -172,6 +178,7 @@ Example:
 
 #### When client finishes the interaction
 Will receive a **POST** on endpoint with body:
+
 Parameter | Type | Value |
 ------------ | ------------- | ------------- |
 type | string | finished_interaction |
