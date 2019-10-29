@@ -154,7 +154,25 @@ Response:
 
 #### Get interaction info:
 
-        sdk.getInteractionInfo(callback);
+        sdk.getInteractionInfo(interactionHash, callback);
+
+- Response
+
+        {
+            "status": 200,
+            "success": true,
+            "data": {
+                "parsed_messages": [{"type", "id", "content"}],
+                "customer": {"customerKey", "id", "historyCount", "firstContact", "fields"},
+                "info": {},
+                "tags": [{"id", "name", "state", "dateCreation", "baseColor", "agent": {"name", "photo"}, "count"}],
+                "note": ""
+            }
+        }
+
+#### Get history interaction info:
+
+        sdk.getHistoryInteractionInfo(interactionHash, callback);
 
 - Response
 
@@ -197,6 +215,31 @@ Response:
             total: {...}
         }
 
+#### Update tags
+Send array with tag ids:
+
+        sdk.updateTags(interactionHash, tagIds, callback);
+
+- Response
+
+        {
+            "interaction": {...},
+            "status": 200,
+            "success": true
+        }
+
+#### Update note
+
+        sdk.updateNote(interactionHash, note, callback);
+
+- Response
+
+        {
+            "interaction": {...},
+            "status": 200,
+            "success": true
+        }
+
 #### Get/Search shotcuts:
 
         sdk.getShortcuts(search, callback);
@@ -208,14 +251,91 @@ Response:
             shortcuts: [...]
         }
 
+#### Get/search customers:
+
+        sdk.getCustomers(limit, page, search, callback);
+
+- Response
+
+        {
+            status: 200,
+            count: 20,
+            customers: [{ "id", "historyCount", "firstContact", "customerKey", "fields" }]
+        }
+
+#### Get customer history:
+
+        sdk.getCustomerHistory(customerKey, limit, page, search, callback);
+
+- Response
+
+        {
+            "result": {
+                "interactions": [{ "startTime", "department", "id", "hash", "lastMessage", "type", "tags", "origin", "customerMediaId"}]
+            },
+            "status": 200
+        }
+
+#### Update customer:
+- Send fields formated like:
+
+        fields: { field.name: field.value, field.name: field.value ... }
+
+        ie.: fields: { "main_identifier": "Client Tester", "channel_email": "client@tester.com" ... }
+
+- Method
+
+        sdk.updateCustomer(customerKey, fields, callback);
+
+- Response
+
+        {
+            "customer": {...},
+            "status": 200
+        }
+
+#### Change customer:
+
+        sdk.changeCustomer(interactionHash, customerId, callback);
+
+- Response
+
+        {
+            "customer": {...},
+            "status": 200
+        }
+
+#### Merge customers:
+
+        sdk.mergeCustomers(newCustomerKey, oldCustomerKey, fields, callback);
+
+- Response
+
+        {
+            "customer": {...},
+            "status": 200,
+            "success": true
+        }
+
+#### Get form fields:
+
+        sdk.getFormFields(callback);
+
+- Response
+
+        {
+            "status": 200,
+            "formFields": [{...}]
+        }
+
 #### Get queue interactions:
 
         sdk.getQueue(limit, page, callback)
 
-Response:
+- Response:
 
         {
-            "interactions": [],
+            "interactions": [...],
             "status": 200,
             "success": true
         }
@@ -224,10 +344,10 @@ Response:
 
         sdk.getInbox(limit, page, search, callback)
 
-Response:
+- Response:
 
         {
-            "interactions": [],
+            "interactions": [...],
             "status": 200,
             "success": true
         }
@@ -237,7 +357,7 @@ Response:
 
         sdk.getCount(callback)
 
-Response:
+- Response:
 
         {
             "inbox": 2,

@@ -1285,11 +1285,51 @@ OmnizeAgentSDK.prototype = {
   getTags: function (callback) {
     makeRequest("GET", `${this.apiUrl}/tags?accountId=${this.accountId}`, this.token, callback);
   },
+  updateTags: function (interactionHash, tagIds, callback) {
+    var params = { agentId: this.agentId, tagIds: tagIds }
+    makeRequest("PUT", `${this.apiUrl}/interactions/${interactionHash}/?accountId=${this.accountId}`, this.token, callback, params);
+  },
+  updateNote: function (interactionHash, note, callback) {
+    var params = { agentId: this.agentId, note: note }
+    makeRequest("PUT", `${this.apiUrl}/interactions/${interactionHash}/?accountId=${this.accountId}`, this.token, callback, params);
+  },
   getShortcuts: function (search = '', callback) {
     makeRequest("GET", `${this.apiUrl}/shortcuts/search/${search}?accountId=${this.accountId}`, this.token, callback);
   },
   getInteractionInfo: function (interactionHash, callback) {
     makeRequest("GET", `${this.apiUrl}/interactions/${interactionHash}/info?accountId=${this.accountId}&origin=uai`, this.token, callback);
+  },
+  getHistoryInteractionInfo: function (interactionHash, callback) {
+    makeRequest("GET", `${this.apiUrl}/interactions/${interactionHash}/info?accountId=${this.accountId}&origin=uaiHistory`, this.token, callback);
+  },
+  getCustomers: function (limit = 20, page = 1, search = '', callback) {
+    makeRequest("GET", `${this.apiUrl}/customers/?accountId=${this.accountId}&limit=${limit}&page=${page}&search=${search}`, this.token, callback);
+  },
+  getCustomerHistory: function (customerKey, limit = 20, page = 1, search = '', callback) {
+    makeRequest("GET", `${this.apiUrl}/customers/${customerKey}/interactions?accountId=${this.accountId}&limit=${limit}&page=${page}&search=${search}`, this.token, callback);
+  },
+  updateCustomer: function (customerKey, fields, callback) {
+    var params = { fields: fields }
+    makeRequest("PUT", `${this.apiUrl}/customers/${customerKey}/?accountId=${this.accountId}`, this.token, callback, params);
+  },
+  changeCustomer: function (interactionHash, customerId, callback) {
+    makeRequest("PUT", `${this.apiUrl}/interactions/${interactionHash}/change_customer/${customerId}?accountId=${this.accountId}`, this.token, callback);
+  },
+  mergeCustomers: function (newCustomerKey, oldCustomerKey, fields, callback) {
+    var params = { oldCustomer: oldCustomerKey, fields: fields }
+    makeRequest("PUT", `${this.apiUrl}/customers/${newCustomerKey}/merge?accountId=${this.accountId}`, this.token, callback, params);
+  },
+  getFormFields: function (callback) {
+    makeRequest("GET", `${this.apiUrl}/form_fields`, this.token, callback);
+  },
+  uploadFile: function (formData, callback) {
+    var request = new XMLHttpRequest();
+
+    request.onload = function (e) { callback(JSON.parse(request.response)) }
+    request.open("POST", `${this.apiUrl}/uploads?accountId=${this.accountId}`, true);
+    request.setRequestHeader('Content-type', 'multipart/form-data');
+    request.setRequestHeader('Authorization', this.token);
+    request.send(JSON.stringify(formData));
   },
   // MS functions
   getQueue: function (limit = 20, page = 1, callback) {
