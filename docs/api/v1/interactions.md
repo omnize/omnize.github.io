@@ -108,6 +108,47 @@ Example:
 }
 ```
 
+#### Update interaction
+Make **PUT** HTTP request:
+```
+https://core.omnize.com.br/api/v1/interactions/{interaction_hash}
+```
+Body:
+
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token
+mood | string | false | "POSITIVE", "NEGATIVE"
+tag_ids | array | false | your tag_ids
+customer_key | string | false | your existing customer
+note | string | false | any string
+
+Example:
+```
+{
+  "token": "y0UrCl1EntSdk",
+  "mood": "POSITIVE",
+  "tag_ids": ["1", "999"],
+  "customer_key": "0010-abcd-efgh-ijkd-1c422e49fdff",
+  "note": "any note here"
+}
+```
+
+Valid Response:
+```
+{
+    "message": "Interaction updated successfully",
+    "status": 200
+}
+```
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
+
 #### Send message
 Make **POST** HTTP request:
 ```
