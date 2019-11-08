@@ -10,6 +10,45 @@ To activate external bot contact suport
     Widget: https://omnize.github.io/wgt-homolog.html#{account_id}
 ```
 
+## Enable and update external_bot
+make **PUT** HTTP request:
+```
+http://partner.omnize.com/api/v1/departments/{department_id}
+```
+body:
+
+Parameter | Type | Required | Valid Attribute |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your partner token |
+department | object | **true** | {"has_external_bot", "external_bot_url"} |
+
+Example:
+```
+{
+  "token": ".......",
+  "department": {
+    "external_bot_url": "http://.....",
+    "has_external_bot": true
+  }
+}
+```
+Valid Response:
+```
+{
+  "success": true,
+  "status": 200,
+  "data": {...}
+}
+```
+Error Response:
+```
+{
+    "success": false,
+    "errors": "Invalid token"
+}
+```
+
+
 ## Make interaction
 #### Start widget, select a department with bot and click on "Chat"
 Will receive a **POST** on bot endpoint with body:
