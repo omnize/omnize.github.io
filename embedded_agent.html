@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+  <head>
+    <meta charset="UTF-8">
+    <title>Omnize Embedded Agent - Test</title>
+  </head>
+  <body style="height: 100%;">
+    <div style="height: 60px; background-color: darkolivegreen; color: white;">
+      <br/>
+      Omnize test
+      <br/>
+    </div>
+    <iframe id="omnizeAgent" style="width: 100%;height: calc(100% - 78px);border: 0px;"></iframe>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var body = {
+                "username": "agent_email",
+                "token": "partner_token" 
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://services.omnize.com.br/authentication/login", true);
+
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    var token = JSON.parse(this.response).token;
+
+                    var frame = document.getElementById("omnizeAgent")
+                    frame.src = `https://my.omnize.com.br?token=${token}`
+                }
+            }
+            xhr.send(JSON.stringify(body));
+        });
+    </script>
+  </body>
+</html>
