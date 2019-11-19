@@ -104,7 +104,7 @@ name | **true**
 email | **true**
 password | **true**
 profile | ["ADMIN","AGENT"]
-text_limit | 7
+text_limit | false
 
 
 Valid Response:
