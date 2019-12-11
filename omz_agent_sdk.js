@@ -1082,7 +1082,7 @@ var OmnizeAgentSDK = function (token) {
   this.agentId;
   this.pendingRequests = [];
   this.apiUrl = "https://services.omnize.com.br";
-  this.msUrl = "https://microservices.omnize.com.br/interactions";
+  this.msUrl = "https://microservices.omnize.com.br";
 };
 
 function parseJwt(token) {
@@ -1333,13 +1333,13 @@ OmnizeAgentSDK.prototype = {
   },
   // MS functions
   getQueue: function (limit = 20, page = 1, callback) {
-    makeRequest("GET", `${this.msUrl}/queue?timestamp=${Date.now()}&limit=${limit}&page=${page}`, this.token, callback)
+    makeRequest("GET", `${this.msUrl}/interactions/queue?timestamp=${Date.now()}&limit=${limit}&page=${page}`, this.token, callback)
   },
   getInbox: function (limit = 20, page = 1, search = '', callback) {
-    makeRequest("GET", `${this.msUrl}/inbox?timestamp=${Date.now()}&limit=${limit}&page=${page}&search=${search}`, this.token, callback)
+    makeRequest("GET", `${this.msUrl}/interactions/inbox?timestamp=${Date.now()}&limit=${limit}&page=${page}&search=${search}`, this.token, callback)
   },
   getCount: function (callback) {
-    makeRequest("GET", `${this.msUrl}/count?timestamp=${Date.now()}`, this.token, callback)
+    makeRequest("GET", `${this.msUrl}/interactions/count?timestamp=${Date.now()}`, this.token, callback)
   },
   getOnlineAgents: function (callback) {
     makeRequest("GET", `${this.msUrl}/dashboard/agents?timestamp=${Date.now()}`, this.token, callback)
