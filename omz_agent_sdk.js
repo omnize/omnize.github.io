@@ -1080,6 +1080,7 @@ var OmnizeAgentSDK = function (token) {
   this.channel;
   this.accountId;
   this.agentId;
+  this.agent = {};
   this.pendingRequests = [];
   this.apiUrl = "https://services.omnize.com.br";
   this.msUrl = "https://microservices.omnize.com.br";
@@ -1114,6 +1115,14 @@ OmnizeAgentSDK.prototype = {
     var tokenParams = parseJwt(this.token);
     this.accountId = tokenParams.account.id
     this.agentId = tokenParams.id
+    this.agent = {
+      id: tokenParams.id,
+      name: tokenParams.name,
+      email: tokenParams.email,
+      photo: tokenParams.photo,
+      profile: tokenParams.profile,
+      textLimit: tokenParams.text_limit
+    }
     this.websocket = new Socket("wss://agentcore.omnize.com.br/socket", {
       params: { user_id: `agents:${this.accountId}:${this.agentId}` }
     })
@@ -1342,6 +1351,6 @@ OmnizeAgentSDK.prototype = {
     makeRequest("GET", `${this.msUrl}/interactions/count?timestamp=${Date.now()}`, this.token, callback)
   },
   getOnlineAgents: function (callback) {
-    makeRequest("GET", `${this.msUrl}/dashboard/agents?timestamp=${Date.now()}`, this.token, callback)
+    makeRequest("GET", `${this.msUrl}/dashboard/agents?accountId=${this.accountId}&timestamp=${Date.now()}`, this.token, callback)
   }
 }
