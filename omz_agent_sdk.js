@@ -1340,5 +1340,8 @@ OmnizeAgentSDK.prototype = {
   },
   getCount: function (callback) {
     makeRequest("GET", `${this.msUrl}/count?timestamp=${Date.now()}`, this.token, callback)
+  },
+  getOnlineAgents: function (callback) {
+    makeRequest("GET", `${this.msUrl}/dashboard/agents?timestamp=${Date.now()}`, this.token, callback)
   }
 }

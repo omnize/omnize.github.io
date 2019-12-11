@@ -366,3 +366,15 @@ Send array with tag ids:
             "success": true,
             "total": 4
         }
+
+#### Get online agents:
+
+        sdk.getOnlineAgents(callback)
+
+- Response:
+
+        {
+            "agents": [online_agents],
+            "success": true,
+            "total": 2
+        }
