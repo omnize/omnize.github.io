@@ -5,24 +5,24 @@ Make **GET** HTTP Request:
 https://services.omnize.com.br/api/v1/form_fields?token={yourClientSdkToken}
 ```
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
+| Parameter  | Type  | Required  |  Valid Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | string | **true** | your clientSdk token |
 
 
 Response:
-Field | Type | Usage |
------------- | ------------- | -------------
-id | integer | internal use
-name | string | name of field
-label | string | label of field that shows on screen
-is_required | boolean | required field to create or update
-is_unique | boolean | unique field to search
-belongs_to_customer | boolean | customer field
-belongs_to_collection | boolean | collection field
-label_updatable | boolean | agent can edit label
-value_updatable | boolean | agent can edit value
-showable | boolean | field shows on screen
+| Field  | Type  |  Usage |
+| ------------ | ------------ | ------------ |
+| id | integer | internal use |
+| name | string | name of field |
+| label | string | label of field that shows on screen |
+| is_required | boolean | required field to create or update |
+| is_unique | boolean | unique field to search |
+| belongs_to_customer | boolean | customer field |
+| belongs_to_collection | boolean | collection field |
+| label_updatable | boolean | agent can edit label |
+| value_updatable | boolean | agent can edit value |
+| showable | boolean | field shows on screen |
 
 
 Response example:

@@ -5,16 +5,16 @@ Make **POST** HTTP Request:
 https://services.omnize.com.br/api/v1/customers
 ```
 Body:
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-token | string | **true** | your clientSdk token
-customers | array | **true** | array of customers with **fields** and **agent_id**
+| Parameter  | Type  | Required   | Valid Attributes  |
+| ------------ | ------------ | ------------ | ------------ |
+| token | string | **true** | your clientSdk token |
+| customers | array | **true** | array of customers with **fields** and **agent_id** |
 
 customers:
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-fields | object | **true** | customer fields
-agent_id | integer | false | valid agent_id
+| Parameter | Type | Required | Valid Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| fields | object | **true** | customer fields |
+| agent_id | integer | false | valid agent_id |
 
 **Obs**: You can see how to **GET** your customer fields on /docs/api/v1/form_fields.md
 
