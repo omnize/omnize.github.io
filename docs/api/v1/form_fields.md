@@ -10,7 +10,8 @@ https://services.omnize.com.br/api/v1/form_fields?token={yourClientSdkToken}
 | token | string | **true** | your clientSdk token |
 
 
-Response:
+Response
+
 | Field  | Type  |  Usage |
 | ------------ | ------------ | ------------ |
 | id | integer | internal use |

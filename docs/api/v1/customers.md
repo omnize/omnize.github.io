@@ -4,13 +4,15 @@ Make **POST** HTTP Request:
 ```
 https://services.omnize.com.br/api/v1/customers
 ```
-Body:
+Body
+
 | Parameter  | Type  | Required   | Valid Attributes  |
 | ------------ | ------------ | ------------ | ------------ |
 | token | string | **true** | your clientSdk token |
 | customers | array | **true** | array of customers with **fields** and **agent_id** |
 
-customers:
+customers
+
 | Parameter | Type | Required | Valid Attributes |
 | ------------ | ------------ | ------------ | ------------ |
 | fields | object | **true** | customer fields |
