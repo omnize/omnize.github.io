@@ -42,7 +42,7 @@ Error Response:
 #### List Agents
  Make **GET** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/agents?token={yourClientSdkToken}
+https://services.omnize.com.br/api/v1/agents?token={yourClientSdkToken}
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -69,7 +69,7 @@ Valid Response:
 #### Get Agent
  Make **GET** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/agents/{agent_id}?token={yourClientSdkToken}
+https://services.omnize.com.br/api/v1/agents/{agent_id}?token={yourClientSdkToken}
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -95,7 +95,7 @@ Valid Response:
 #### Create Agent
  Make **POST** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/agents
+https://services.omnize.com.br/api/v1/agents
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -127,7 +127,7 @@ Valid Response:
 #### Update Agent
  Make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/agents/{agent_id}
+https://services.omnize.com.br/api/v1/agents/{agent_id}
 ```
 Parameter  | Required |
 ------------  | -------------
