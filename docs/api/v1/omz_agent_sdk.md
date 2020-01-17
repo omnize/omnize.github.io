@@ -378,3 +378,15 @@ Send array with tag ids:
             "success": true,
             "total": 2
         }
+
+#### Get agent history:
+
+        sdk.getHistory(limit, page, search, callback)
+
+- Response:
+
+        {
+            "interactions": [...],
+            "status": 200,
+            "success": true
+        }

@@ -1351,6 +1351,9 @@ OmnizeAgentSDK.prototype = {
     makeRequest("GET", `${this.msUrl}/interactions/count?timestamp=${Date.now()}`, this.token, callback)
   },
   getOnlineAgents: function (callback) {
-    makeRequest("GET", `${this.msUrl}/dashboard/agents?accountId=${this.accountId}&timestamp=${Date.now()}`, this.token, callback)
+    makeRequest("GET", `${this.msUrl}/dashboard/agents?timestamp=${Date.now()}`, this.token, callback)
+  },
+  getHistory: function (limit, page, search, callback) {
+    makeRequest("GET", `${this.msUrl}/history?timestamp=${Date.now()}&limit=${limit || 20}&page=${page || 1}&search=${search || ''}`, this.token, callback)
   }
 }
