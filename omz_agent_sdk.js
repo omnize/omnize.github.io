@@ -1340,6 +1340,10 @@ OmnizeAgentSDK.prototype = {
     request.setRequestHeader('Authorization', this.token);
     request.send(JSON.stringify(formData));
   },
+  sendChatEmail: function (interactionHash, toEmail, callback) {
+    var params = { to_email: toEmail }
+    makeRequest("POST", `${this.apiUrl}/interactions/${interactionHash}/send_chat_email`, this.token, callback, params);
+  },
   // MS functions
   getQueue: function (limit = 20, page = 1, callback) {
     makeRequest("GET", `${this.msUrl}/interactions/queue?timestamp=${Date.now()}&limit=${limit}&page=${page}`, this.token, callback)
