@@ -390,3 +390,16 @@ Send array with tag ids:
             "status": 200,
             "success": true
         }
+        
+#### Send chat email:
+
+        sdk.sendChatEmail(toEmail, callback)
+
+- Response:
+
+        {
+            "status": 200,
+            "success": true
+        }
+
+
