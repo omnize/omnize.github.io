@@ -231,7 +231,6 @@ token | string | **true** | your clientSdk token |
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
       "state": "queued",
-      "position": 1
       "extra": {}
     }
 
