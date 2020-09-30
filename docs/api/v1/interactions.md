@@ -1,7 +1,7 @@
 ## ClientApi V1
 To get access token and set webhook url to receive, access:
 ```
-https://app.omnize.com.br
+https://zchat-admin.zenvia.com
 ```
 Go to:
 ```
@@ -9,10 +9,6 @@ Menu > Settings > Integrations > ClientSDK
 ```
 Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
 
-#### For homolog environment
-```
-Omnize platform: https://homolog.app.omnize.com.br
-Api endpoint: https://homolog.core.omnize.com.br
 ```
 
 #### Get Departments
@@ -27,7 +23,7 @@ token | **true** |
 #### Start interaction
 Make **POST** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions
+https://zchat.zenvia.io/core/api/v1/interactions
 ```
 Body:
 
@@ -111,7 +107,7 @@ Example:
 #### Update interaction
 Make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions/{interaction_hash}
+https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}
 ```
 Body:
 
@@ -152,7 +148,7 @@ Error Response:
 #### Send message
 Make **POST** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/messages
+https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/messages
 ```
 body:
 
@@ -192,7 +188,7 @@ Error Response:
 #### Notify when client typing
 Make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/typing
+https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/typing
 ```
 body:
 
@@ -203,7 +199,7 @@ token | string | **true** | your clientSdk token |
 #### Notify when client stop typing
 Make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/cleared
+https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/cleared
 ```
 body:
 
@@ -215,7 +211,7 @@ token | string | **true** | your clientSdk token |
 #### Finish interaction
 Make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/interactions/{interaction_hash}/finish
+https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/finish
 ```
 body:
 

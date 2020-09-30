@@ -3,7 +3,7 @@
 #### Get Online Agents
  Make **GET** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/agents/online?token={yourClientSdkToken}&department_id={yourDepartmentId}
+ https://zchat.zenvia.io/core/api/v1/agents/online?token={yourClientSdkToken}&department_id={yourDepartmentId}
 ```
 Parameter  | Required |
 ------------  | -------------

@@ -1,7 +1,7 @@
 ## Whatsapp Api V1
 To get access token and set webhook url to receive, access:
 
-    https://app.omnize.com.br
+    https://zchat-admin.zenvia.com
 
 Go to:
 
@@ -9,29 +9,24 @@ Go to:
 
 Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
 
-#### For homolog environment
-
-    Omnize platform: https://homolog.app.omnize.com.br
-
-    Api endpoint: https://homolog.core.omnize.com.br
 
 #### Get Departments
 Make HTTP request:
 
-    GET https://core.omnize.com.br/api/v1/departments?token=jh2kj3k12j3hk1j
+    GET https://zchat.zenvia.io/api/external/departments?token=jh2kj3k12j3hk1j
 
 
 #### Send message
 Make HTTP request:
 
-    POST https://core.omnize.com.br/api/v1/whatsapp
+    POST https://zchat.zenvia.io/core/api/v1/whatsapp
 
 With body:
 
     {
       "token": "j23hk4j2h3kj4h...",
       "content": "Test message",
-      "content_type": "image/png", // Optional, used to send media files. Default 'text' 
+      "content_type": "image/png", // Optional, used to send media files. Default 'text'
       "url": ".....", // Optional, link for the media source used if content_type is different of 'text'
       "department_id": 1,
       "customer": {
@@ -93,17 +88,17 @@ Response:
         "content": "Message",
         "type": "text"
       },
-      "agent": { 
-        "id": 123, 
-        "name": "Agent" 
+      "agent": {
+        "id": 123,
+        "name": "Agent"
       }
     }
-    
+
 #### Agent transfer interaction to department
 
-    { 
-      "external_id": "abcd1234", 
-      "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213", 
-      "state": "transferred", 
-      "department_id": "1545" 
+    {
+      "external_id": "abcd1234",
+      "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
+      "state": "transferred",
+      "department_id": "1545"
     }

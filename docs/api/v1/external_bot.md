@@ -1,13 +1,6 @@
 # External bot
 To activate external bot contact suport
 
-## For homolog environment
-```
-    Omnize platform: https://homolog.app.omnize.com.br
-
-    Api endpoint: https://homolog.core.omnize.com.br
-
-    Widget: https://omnize.github.io/wgt-homolog.html#{account_id}
 ```
 
 ## Enable and update external_bot
@@ -71,7 +64,7 @@ Example:
 #### Accept
 make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/bot/{interaction_hash}/accept
+ https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/accept
 ```
 body:
 
@@ -97,7 +90,7 @@ Error Response:
 #### Finish
 make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/bot/{interaction_hash}/finish
+ https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/finish
 ```
 body:
 
@@ -123,7 +116,7 @@ Error Response:
 #### Transfer
 make **PUT** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/bot/{interaction_hash}/transfer
+ https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/transfer
 ```
 body:
 
@@ -150,7 +143,7 @@ Error Response:
 #### Send message
 make **POST** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/bot/{interaction_hash}/message
+ https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/message
 ```
 body:
 

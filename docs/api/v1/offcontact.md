@@ -2,7 +2,7 @@
 #### Create offcontact
 Make **POST** HTTP request:
 ```
-https://core.omnize.com.br/api/v1/offcontact
+ https://zchat.zenvia.io/core/api/v1/offcontact
 ```
 Body
 
