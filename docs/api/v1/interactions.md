@@ -9,8 +9,6 @@ Menu > Settings > Integrations > ClientSDK
 ```
 Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
 
-```
-
 #### Get Departments
 Make **GET** HTTP request:
 ```
