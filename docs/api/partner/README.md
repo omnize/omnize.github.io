@@ -86,6 +86,35 @@ In case of errors:
       success: false,
       errors: "E-mail can be blank"
     }
+    
+
+#### Delete Agent
+Make HTTP request:
+
+    DELETE https://zchat.zenvia.io/api/partner/agents/:id
+
+With body:
+
+    {
+      token: 'hj4h2k3h4k23'
+    }
+
+Response, success:
+
+    {
+      status: 200,
+      success: true,
+      message: "Agent deleted successfully"
+    }
+
+In case of errors:
+
+    {
+      status: 200,
+      success: false,
+      errors: "Invalid token"
+    }
+
 
 #### Update Agent Profile
 Make a HTTP request:
