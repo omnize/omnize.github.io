@@ -10,7 +10,7 @@ For login/password contact suporte@omnize.com
 #### Create Agent
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/agents
+    POST https://zchat.zenvia.io/api/partner/agents
 
 With body:
 
@@ -65,7 +65,7 @@ In case of errors:
 #### Update Agent
 Make a HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/agents/:id
+    PUT https://zchat.zenvia.io/api/partner/agents/:id
 
 With body:
 
@@ -97,7 +97,7 @@ In case of errors:
 #### Update Agent Profile
 Make a HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/agents/:id/profile
+    PUT https://zchat.zenvia.io/api/partner/agents/:id/profile
 
 With body:
 
@@ -126,7 +126,7 @@ Response, success:
   ```
   Make HTTP request:
  ```
-    GET http://partner.omnize.com/api/v1/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
+    GET https://zchat.zenvia.io/api/partner/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
 ```
 
 Response, success:
@@ -157,7 +157,7 @@ In case of errors:
   ```
   Make HTTP request:
   ```
-    GET http://partner.omnize.com/api/v1/accounts?token=hj4h2k3h4k23&search=test@gmail&column=name&direction=asc&page=1&limit=10
+    GET https://zchat.zenvia.io/api/partner/accounts?token=hj4h2k3h4k23&search=test@gmail&column=name&direction=asc&page=1&limit=10
 ```
 Response, success:
 
@@ -193,7 +193,7 @@ In case of errors:
 #### Create Account
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/accounts
+    POST https://zchat.zenvia.io/api/partner/accounts
 
 With body:
 
@@ -262,7 +262,7 @@ In case of errors:
 #### Update Account
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/accounts/:id
+    PUT https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -296,7 +296,7 @@ In case of errors:
 #### Inactive Account
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/accounts/:id
+    PUT https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -325,7 +325,7 @@ In case of errors:
 #### Active Account
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/accounts/:id
+    PUT https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -355,7 +355,7 @@ In case of errors:
 #### Delete Account
 Make HTTP request:
 
-    DELETE http://partner.omnize.com/api/v1/accounts/:id
+    DELETE https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -382,7 +382,7 @@ In case of errors:
 #### Update account licenses
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/accounts/:id
+    PUT https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -409,7 +409,7 @@ In case of errors:
 #### Update account licenses code
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/accounts/:id
+    PUT https://zchat.zenvia.io/api/partner/accounts/:id
 
 With body:
 
@@ -482,7 +482,7 @@ Link to login, with returned token:
 #### Create
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/departments
+    POST https://zchat.zenvia.io/api/partner/departments
 
 With body:
 
@@ -516,7 +516,7 @@ In case of errors:
 #### Update
 Make HTTP request:
 
-    PUT http://partner.omnize.com/api/v1/departments/:id
+    PUT https://zchat.zenvia.io/api/partner/departments/:id
 
 With body:
 
@@ -548,7 +548,7 @@ In case of errors:
 #### Retrieve all
 Make HTTP request:
 
-    GET http://partner.omnize.com/api/v1/departments?token=hj4h2k3h4k23&account_id=1
+    GET https://zchat.zenvia.io/api/partner/departments?token=hj4h2k3h4k23&account_id=1
 
 Response, success:
 
@@ -569,7 +569,7 @@ In case of errors:
 #### Retrieve all channels
 Make HTTP request:
 
-    GET http://partner.omnize.com/api/v1/departments/:id/channels?token=hj4h2k3h4k23
+    GET https://zchat.zenvia.io/api/partner/departments/:id/channels?token=hj4h2k3h4k23
 
 Response, success:
 
@@ -590,7 +590,7 @@ In case of errors:
 #### Retrieve all agents on a department
 Make HTTP request:
 
-    GET http://partner.omnize.com/api/v1/departments/:id/agents?token=hj4h2k3h4k23
+    GET https://zchat.zenvia.io/api/partner/departments/:id/agents?token=hj4h2k3h4k23
 
 Response, success:
 
@@ -611,7 +611,7 @@ In case of errors:
 #### Add agents
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/departments/:id/add_agents
+    POST https://zchat.zenvia.io/api/partner/departments/:id/add_agents
 
 With body:
 
@@ -639,7 +639,7 @@ In case of errors:
 #### Remove agents
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/departments/:id/remove_agents
+    POST https://zchat.zenvia.io/api/partner/departments/:id/remove_agents
 
 With body:
 
@@ -667,7 +667,7 @@ In case of errors:
 #### Add channels
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/departments/:id/add_channels
+    POST https://zchat.zenvia.io/api/partner/departments/:id/add_channels
 
 With body:
 
@@ -695,7 +695,7 @@ In case of errors:
 #### Remove channels
 Make HTTP request:
 
-    POST http://partner.omnize.com/api/v1/departments/:id/remove_channels
+    POST https://zchat.zenvia.io/api/partner/departments/:id/remove_channels
 
 With body:
 
