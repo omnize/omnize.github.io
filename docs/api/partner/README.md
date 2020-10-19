@@ -1,10 +1,3 @@
-## Partner Portal
-To get partner token, access:
-
-    http://partner.omnize.com
-
-For login/password contact suporte@omnize.com
-
 ## Partner API
 
 #### Create Agent
