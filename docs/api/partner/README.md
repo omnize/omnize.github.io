@@ -1,5 +1,83 @@
 ## Partner API
 
+#### Retrieve agents
+  Accepted params:
+  ```
+  token: partner_token (required)
+  account_id: account_id (required)
+  column: order by column (id name email) default: id
+  direction: order by (desc asc) default: desc
+  page: pagination of agents (>=1) default: 1
+  limit: limit number of return agents default: 20
+  search: search by (id name or email)
+  ```
+  Make HTTP request:
+ ```
+    GET https://zchat.zenvia.io/partner/apí/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
+```
+
+Response, success:
+
+    {
+      status: 200,
+      success: true,
+      data: [listOfAgents]
+    }
+
+In case of errors:
+
+    {
+      status: 200,
+      success: false,
+      errors: "Invalid token"
+    }
+
+#### Show agent
+  Accepted params:
+  ```
+  token: partner_token (required)
+  account_id: account_id (required)
+  ```
+  Make HTTP request:
+ ```
+    GET https://zchat.zenvia.io/partner/apí/agents/:id?token=hj4h2k3h4k23&account_id=1
+```
+
+Response, success:
+
+    {
+      status: 200,
+      success: true,
+      data: { 
+        "id": 11111, 
+        "name": "Tes1t 20/10", 
+        "photo": null, 
+        "phone_extension": null, 
+        "signature": null, 
+        "email": "test20-102-2@example.com", 
+        "deleted_at": null, 
+        "ativo": 0, 
+        "active": false, 
+        "departments": [{ 
+            "id": 2222, 
+            "name": "Atendimento" 
+        }], 
+        "new_status": "OFFLINE", 
+        "department": {
+          "name": "Atendimento", "id": 2222
+        }
+      }
+    }
+
+In case of errors:
+
+    {
+      status: 200,
+      success: false,
+      errors: "Invalid token"
+    }
+
+
 #### Create Agent
 Make HTTP request:
 
@@ -135,37 +213,6 @@ Response, success:
       success: true
     }
 
-#### Retrieve agents
-  Accepted params:
-  ```
-  token: partner_token (required)
-  account_id: account_id (required)
-  column: order by column (id name email) default: id
-  direction: order by (desc asc) default: desc
-  page: pagination of agents (>=1) default: 1
-  limit: limit number of return agents default: 20
-  search: search by (id name or email)
-  ```
-  Make HTTP request:
- ```
-    GET https://zchat.zenvia.io/partner/apí/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
-```
-
-Response, success:
-
-    {
-      status: 200,
-      success: true,
-      data: [listOfAgents]
-    }
-
-In case of errors:
-
-    {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
-    }
 
 #### Retrieve accounts
   Accepted params:
