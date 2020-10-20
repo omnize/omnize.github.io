@@ -474,32 +474,6 @@ Widget-code, set proper account_id at 'wOmz.init({id:#{id}})':
     <!-- Fim do script Omnize -->
 
 
-#### Url login
-Make a http request to generate auth_token:
-
-    POST https://ca1vsqktff.execute-api.us-east-1.amazonaws.com/prod/authentication
-
-Body:
-
-    {
-      "action": "loginPartner",
-      "username":"user@example.org", // Agent email
-      "token":"B4cPxMMVteyoqCk6UUsK" // Partner token
-    }
-
-Response:
-
-    {
-      "message": "",
-      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVaRp5D0e3",
-      "status": 200
-    }
-
-Link to login, with returned token:
-
-    https://login.omnize.com.br?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVaRp5D0e3
-
-
 ## Manage Departments
 #### Create
 Make HTTP request:
