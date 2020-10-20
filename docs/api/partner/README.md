@@ -3,7 +3,7 @@
 #### Create Agent
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/agents
+    POST https://zchat.zenvia.io/partner/apí/agents
 
 With body:
 
@@ -58,7 +58,7 @@ In case of errors:
 #### Update Agent
 Make a HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/agents/:id
+    PUT https://zchat.zenvia.io/partner/apí/agents/:id
 
 With body:
 
@@ -91,7 +91,7 @@ In case of errors:
 #### Delete Agent
 Make HTTP request:
 
-    DELETE https://zchat.zenvia.io/api/partner/agents/:id
+    DELETE https://zchat.zenvia.io/partner/apí/agents/:id
 
 With body:
 
@@ -119,7 +119,7 @@ In case of errors:
 #### Update Agent Profile
 Make a HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/agents/:id/profile
+    PUT https://zchat.zenvia.io/partner/apí/agents/:id/profile
 
 With body:
 
@@ -148,7 +148,7 @@ Response, success:
   ```
   Make HTTP request:
  ```
-    GET https://zchat.zenvia.io/api/partner/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
+    GET https://zchat.zenvia.io/partner/apí/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
 ```
 
 Response, success:
@@ -179,7 +179,7 @@ In case of errors:
   ```
   Make HTTP request:
   ```
-    GET https://zchat.zenvia.io/api/partner/accounts?token=hj4h2k3h4k23&search=test@gmail&column=name&direction=asc&page=1&limit=10
+    GET https://zchat.zenvia.io/partner/apí/accounts?token=hj4h2k3h4k23&search=test@gmail&column=name&direction=asc&page=1&limit=10
 ```
 Response, success:
 
@@ -215,7 +215,7 @@ In case of errors:
 #### Create Account
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/accounts
+    POST https://zchat.zenvia.io/partner/apí/accounts
 
 With body:
 
@@ -284,7 +284,7 @@ In case of errors:
 #### Update Account
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/accounts/:id
+    PUT https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -318,7 +318,7 @@ In case of errors:
 #### Inactive Account
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/accounts/:id
+    PUT https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -347,7 +347,7 @@ In case of errors:
 #### Active Account
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/accounts/:id
+    PUT https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -377,7 +377,7 @@ In case of errors:
 #### Delete Account
 Make HTTP request:
 
-    DELETE https://zchat.zenvia.io/api/partner/accounts/:id
+    DELETE https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -404,7 +404,7 @@ In case of errors:
 #### Update account licenses
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/accounts/:id
+    PUT https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -431,7 +431,7 @@ In case of errors:
 #### Update account licenses code
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/accounts/:id
+    PUT https://zchat.zenvia.io/partner/apí/accounts/:id
 
 With body:
 
@@ -478,7 +478,7 @@ Widget-code, set proper account_id at 'wOmz.init({id:#{id}})':
 #### Create
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/departments
+    POST https://zchat.zenvia.io/partner/apí/departments
 
 With body:
 
@@ -512,7 +512,7 @@ In case of errors:
 #### Update
 Make HTTP request:
 
-    PUT https://zchat.zenvia.io/api/partner/departments/:id
+    PUT https://zchat.zenvia.io/partner/apí/departments/:id
 
 With body:
 
@@ -544,7 +544,7 @@ In case of errors:
 #### Retrieve all
 Make HTTP request:
 
-    GET https://zchat.zenvia.io/api/partner/departments?token=hj4h2k3h4k23&account_id=1
+    GET https://zchat.zenvia.io/partner/apí/departments?token=hj4h2k3h4k23&account_id=1
 
 Response, success:
 
@@ -565,7 +565,7 @@ In case of errors:
 #### Retrieve all channels
 Make HTTP request:
 
-    GET https://zchat.zenvia.io/api/partner/departments/:id/channels?token=hj4h2k3h4k23
+    GET https://zchat.zenvia.io/partner/apí/departments/:id/channels?token=hj4h2k3h4k23
 
 Response, success:
 
@@ -586,7 +586,7 @@ In case of errors:
 #### Retrieve all agents on a department
 Make HTTP request:
 
-    GET https://zchat.zenvia.io/api/partner/departments/:id/agents?token=hj4h2k3h4k23
+    GET https://zchat.zenvia.io/partner/apí/departments/:id/agents?token=hj4h2k3h4k23
 
 Response, success:
 
@@ -607,7 +607,7 @@ In case of errors:
 #### Add agents
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/departments/:id/add_agents
+    POST https://zchat.zenvia.io/partner/apí/departments/:id/add_agents
 
 With body:
 
@@ -635,7 +635,7 @@ In case of errors:
 #### Remove agents
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/departments/:id/remove_agents
+    POST https://zchat.zenvia.io/partner/apí/departments/:id/remove_agents
 
 With body:
 
@@ -663,7 +663,7 @@ In case of errors:
 #### Add channels
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/departments/:id/add_channels
+    POST https://zchat.zenvia.io/partner/apí/departments/:id/add_channels
 
 With body:
 
@@ -691,7 +691,7 @@ In case of errors:
 #### Remove channels
 Make HTTP request:
 
-    POST https://zchat.zenvia.io/api/partner/departments/:id/remove_channels
+    POST https://zchat.zenvia.io/partner/apí/departments/:id/remove_channels
 
 With body:
 
