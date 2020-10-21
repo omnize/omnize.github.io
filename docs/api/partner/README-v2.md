@@ -69,7 +69,7 @@ Response, success:
     {
       status: 200,
       success: true,
-      data: { 
+      agent: { 
         "id": 1,
         "name": "Agent Name",
         "photo": null, // Url
@@ -128,7 +128,7 @@ Response, success:
     {
       status: 200,
       success: true,
-      data: {
+      agent: {
         "id": 1,
         "name": "Agent Name",
         "photo": null,
@@ -183,7 +183,7 @@ Response, success:
     {
       status: 200,
       success: true,
-      data: {
+      agent: {
         "id": 1,
         "name": "Agent Name",
         "photo": null,
@@ -264,7 +264,7 @@ Response, success:
 
     {
       status: 200
-      data: [
+      departments: [
         {
           "active": true,
           "description": "Atendimento",
