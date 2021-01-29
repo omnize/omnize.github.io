@@ -12,7 +12,7 @@ Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' 
 #### Get Departments
 Make **GET** HTTP request:
 ```
-https://services.omnize.com.br/api/v1/departments?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/departments?token={yourClientSdkToken}
 ```
 Parameter  | Required |
 ------------  | ------------- |
@@ -50,7 +50,7 @@ Example:
     "clientId": "any",
     "botId": "parameter"
   },
-  "external_history": "https://services.omnize.com.br/api/v1/helpers/external_history"
+  "external_history": "https://test.com"
 }
 ```
 Valid Response:
