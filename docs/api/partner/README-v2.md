@@ -48,9 +48,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 ### Show agent
@@ -67,9 +67,9 @@ In case of errors:
 Response, success:
 
     {
-      status: 200,
-      success: true,
-      agent: { 
+      "status": 200,
+      "success": true,
+      "agent": { 
         "id": 1,
         "name": "Agent Name",
         "photo": null, // Url
@@ -94,9 +94,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 
@@ -108,15 +108,15 @@ Make HTTP request:
 With body:
 
     {
-      token: 'j423j42jn3kj4n',
-      profile: 'ADMIN', // 'ADMIN' or 'AGENT'
-      department_ids: [1,22,333]
-      agent: {
-        email: 'test@example.com', // Email used to login
-        name: 'Test Agent',
-        password: 'j2hk2j3h4kj23h4kjh2k34', // Plain text signed as SHA256 hash
-        text_limit: 7, // optional 
-        account_id: 1111
+      "token": "j423j42jn3kj4n",
+      "profile": "ADMIN",
+      "department_ids": [1,22,333],
+      "agent": {
+        "email": "test@example.com",
+        "name": "Test Agent",
+        "password": "j2hk2j3h4kj23h4kjh2k34",
+        "text_limit": 7,
+        "account_id": 1111
       }
     }
 
@@ -126,9 +126,9 @@ Without parameter department_ids, will add agent to first account department
 Response, success:
 
     {
-      status: 200,
-      success: true,
-      agent: {
+      "status": 200,
+      "success": true,
+      "agent": {
         "id": 1,
         "name": "Agent Name",
         "photo": null,
@@ -153,9 +153,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 ### Update Agent
@@ -166,24 +166,24 @@ Make a HTTP request:
 With body:
 
     {
-      token: 'j423j42jn3kj4n',
-      profile: 'ADMIN', // 'ADMIN' or 'AGENT'
-      agent: {
-        account_id: 1111,
-        email: 'update@example.com',
-        name: 'New Name',
-        text_limit: 7, // optional 
-        password: 'j2hk2j3h4kj23h4kjh2k34' // Plain text signed as SHA256 hash,
-        active: true  
+      "token: 'j423j42jn3kj4n',
+      "profile": 'ADMIN', // 'ADMIN' or 'AGENT'
+      "agent": {
+        "account_id": 1111,
+        "email": "update@example.com",
+        "name": "New Name",
+        "text_limit": 7, // optional 
+        "password": "j2hk2j3h4kj23h4kjh2k34" // Plain text signed as SHA256 hash,
+        "active": true  
       }
     }
 
 Response, success:
 
     {
-      status: 200,
-      success: true,
-      agent: {
+      "status": 200,
+      "success": true,
+      "agent": {
         "id": 1,
         "name": "Agent Name",
         "photo": null,
@@ -208,9 +208,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "E-mail can be blank"
+      "status": 200,
+      "success": false,
+      "errors": "E-mail can't be blank"
     }
     
 
@@ -222,23 +222,26 @@ Make HTTP request:
 With body:
 
     {
-      token: 'hj4h2k3h4k23'
+      "token": "hj4h2k3h4k23",
+      "agent": {
+        "account_id": 1111
+      }
     }
 
 Response, success:
 
     {
-      status: 200,
-      success: true,
-      message: "Agent deleted successfully"
+      "status": 200,
+      "success": true,
+      "message": "Agent deleted successfully"
     }
 
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 ## Manage Departments
@@ -263,8 +266,8 @@ Make HTTP request:
 Response, success:
 
     {
-      status: 200
-      departments: [
+      "status": 200
+      "departments": [
         {
           "active": true,
           "description": "Atendimento",
@@ -302,9 +305,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 
@@ -316,13 +319,13 @@ Make HTTP request:
 With body:
 
     {
-      token: 'hj4h2k3h4k23',
-      agent_ids: [1,22,33],
-      channels: ["chat"],
-      department: {
-        account_id: 1,
-        name: "New Department",
-        description: "A new created department"
+      "token": "hj4h2k3h4k23",
+      "agent_ids": [1,22,33],
+      "channels": ["chat"],
+      "department": {
+        "account_id": 1,
+        "name": "New Department",
+        "description": "A new created department"
       }
     }
 
@@ -351,9 +354,9 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
 ### Update
@@ -364,22 +367,22 @@ Make HTTP request:
 With body:
 
     {
-      token: 'hj4h2k3h4k23',
-      agent_ids: [1,22,33],
-      channels: ["chat"],
-      department: {
-        account_id: 1,
-        name: "New Name",
-        description: "A new description"
+      "token": 'hj4h2k3h4k23',
+      "agent_ids": [1,22,33],
+      "channels": ["chat"],
+      "department": {
+        "account_id": 1,
+        "name": "New Name",
+        "description": "A new description"
       }
     }
 
 Response, success:
 
     {
-      status: 200,
-      success: true,
-      department: {
+      "status": 200,
+      "success": true,
+      "department": {
         "active": true,
         "description": "A new description",
         "id": 1,
@@ -399,8 +402,8 @@ Response, success:
 In case of errors:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Invalid token"
     }
 
