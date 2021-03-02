@@ -42,7 +42,7 @@ Error Response:
 #### List Agents
  Make **GET** HTTP request:
 ```
-https://services.omnize.com.br/api/v1/agents?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/agents?token={yourClientSdkToken}
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -54,9 +54,13 @@ Valid Response:
     {
         "id": id,
         "name": "Agent Name",
-        "photo": "Agent photo url",
+        "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
         "phone_extension": null,
         "signature": null,
+        "email": "agent@company.com",
+        "deleted_at": null,
+        "ativo": 1,
+        "active": true,
         "new_status": "OFFLINE",
         "department": {
             "name": "Atendimento",
@@ -69,7 +73,7 @@ Valid Response:
 #### Get Agent
  Make **GET** HTTP request:
 ```
-https://services.omnize.com.br/api/v1/agents/{agent_id}?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/agents/{agent_id}?token={yourClientSdkToken}
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -81,9 +85,13 @@ Valid Response:
 {
     "id": id,
     "name": "Agent Name",
-    "photo": "Agent photo url",
+    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
     "phone_extension": null,
     "signature": null,
+    "email": "agent@company.com",
+    "deleted_at": null,
+    "ativo": 1,
+    "active": true,
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",
@@ -95,7 +103,7 @@ Valid Response:
 #### Create Agent
  Make **POST** HTTP request:
 ```
-https://services.omnize.com.br/api/v1/agents
+https://zchat.zenvia.io/api/external/agents
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -112,9 +120,13 @@ Valid Response:
 {
     "id": id,
     "name": "Agent Name",
-    "photo": "Agent photo url",
+    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
     "phone_extension": null,
     "signature": null,
+    "email": "agent@company.com",
+    "deleted_at": null,
+    "ativo": 1,
+    "active": true,
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",
@@ -127,7 +139,7 @@ Valid Response:
 #### Update Agent
  Make **PUT** HTTP request:
 ```
-https://services.omnize.com.br/api/v1/agents/{agent_id}
+https://zchat.zenvia.io/api/external/agents/{agent_id}
 ```
 Parameter  | Required |
 ------------  | -------------
@@ -145,9 +157,13 @@ Valid Response:
 {
     "id": id,
     "name": "Agent Name",
-    "photo": "Agent photo url",
+    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
     "phone_extension": null,
     "signature": null,
+    "email": "agent@company.com",
+    "deleted_at": null,
+    "ativo": 1,
+    "active": true,
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",

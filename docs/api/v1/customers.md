@@ -2,7 +2,7 @@
 Create or Update Customers
 Make **POST** HTTP Request:
 ```
-https://services.omnize.com.br/api/v1/customers
+https://zchat.zenvia.io/api/external/customers
 ```
 Body
 

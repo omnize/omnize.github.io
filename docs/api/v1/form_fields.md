@@ -2,7 +2,7 @@
 
 Make **GET** HTTP Request:
 ```
-https://services.omnize.com.br/api/v1/form_fields?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/form_fields?token={yourClientSdkToken}
 ```
 
 | Parameter  | Type  | Required  |  Valid Attributes |
@@ -19,6 +19,8 @@ Response
 | label | string | label of field that shows on screen |
 | is_required | boolean | required field to create or update |
 | is_unique | boolean | unique field to search |
+| type | string | field data type |
+| is_multiple | boolean | can have more than one |
 | belongs_to_customer | boolean | customer field |
 | belongs_to_collection | boolean | collection field |
 | label_updatable | boolean | agent can edit label |

@@ -47,9 +47,6 @@ Response:
 
     {
       "message": "Message sent successfully",
-      "data": {
-        "message_hash": "3110a5da-87c7-4f6d-a4ab-2b1ed5edfd46"
-      }
     }
 
 
