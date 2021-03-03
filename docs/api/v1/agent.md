@@ -10,12 +10,12 @@ Parameter  | Required |
 token | **true**
  department_id | false
 
-Valid Response:
+Success Response:
 ```
 {
     "agents": [
         {
-            "id": id,
+            "id": 999,
             "name": "Agent Name",
             "photo": "https://omz-photo.s3.amazonaws.com/agent.png"
         }

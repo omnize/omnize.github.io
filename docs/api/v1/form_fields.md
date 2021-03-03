@@ -2,33 +2,15 @@
 
 Make **GET** HTTP Request:
 ```
-https://zchat.zenvia.io/api/external/form_fields?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/form_fields?token={yourAPIToken}
 ```
 
-| Parameter  | Type  | Required  |  Valid Attributes |
+| Parameter  | Required  | Description | Default Attributes |
 | ------------ | ------------ | ------------ | ------------ |
-| token | string | **true** | your clientSdk token |
+| token | **true** | Your API token | -|
 
 
 Response
-
-| Field  | Type  |  Usage |
-| ------------ | ------------ | ------------ |
-| id | integer | internal use |
-| name | string | name of field |
-| label | string | label of field that shows on screen |
-| is_required | boolean | required field to create or update |
-| is_unique | boolean | unique field to search |
-| type | string | field data type |
-| is_multiple | boolean | can have more than one |
-| belongs_to_customer | boolean | customer field |
-| belongs_to_collection | boolean | collection field |
-| label_updatable | boolean | agent can edit label |
-| value_updatable | boolean | agent can edit value |
-| showable | boolean | field shows on screen |
-
-
-Response example:
 ```
 {
   "status": 200,
@@ -36,7 +18,7 @@ Response example:
     {
       "id": 124585,
       "name": "main_identifier",
-      "label": "Nome",
+      "label": "Name",
       "is_required": true,
       "is_unique": false,
       "type": "string",
@@ -50,7 +32,7 @@ Response example:
     {
       "id": 124580,
       "name": "channel_phone",
-      "label": "Telefone",
+      "label": "Telephone",
       "is_required": true,
       "is_unique": true,
       "type": "phone",
@@ -78,6 +60,21 @@ Response example:
   ]
 }
 ```
+| Field  | Type  |  Description |
+| ------------ | ------------ | ------------ |
+| id | integer | Unique id |
+| name | string | Name of the field |
+| label | string | Name of the field that shows on screen |
+| is_required | boolean | Required field for creating or updating |
+| is_unique | boolean | Unique field, can be used for searching |
+| type | string | Field data type |
+| is_multiple | boolean | Allows more than one |
+| belongs_to_customer | boolean | Customer field |
+| belongs_to_collection | boolean | Collection field |
+| label_updatable | boolean | Agent can edit label |
+| value_updatable | boolean | Agent can edit value |
+| showable | boolean | Field shows on screen |
+
 Error Response:
 ```
 {

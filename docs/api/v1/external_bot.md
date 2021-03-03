@@ -1,8 +1,6 @@
 # External bot
 To activate external bot contact suport
 
-```
-
 ## Enable and update external_bot
 make **PUT** HTTP request:
 ```

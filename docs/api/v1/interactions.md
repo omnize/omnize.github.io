@@ -1,59 +1,49 @@
 ## ClientApi V1
-To get access token and set webhook url to receive, access:
+To get the access token and set a webhook URL, access:
 ```
 https://zchat-admin.zenvia.com
 ```
 Go to:
 ```
-Menu > Settings > Integrations > ClientSDK
+Menu > Settings > Integrations > API
 ```
-Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
+Click on 'Generate Token' to obtain a new one. Add your URL at 'Webhook URL' to receive the trigger events.
 
-#### Get Departments
-Make **GET** HTTP request:
-```
-https://zchat.zenvia.io/api/external/departments?token={yourClientSdkToken}
-```
-Parameter  | Required |
-------------  | ------------- |
-token | **true** |
 
 #### Start interaction
-Make **POST** HTTP request:
+Make HTTP **POST** request:
 ```
 https://zchat.zenvia.io/core/api/v1/interactions
 ```
 Body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-department_id | integer | **true** | any active department_id from your account |
-media_type | string | false | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
-extra | object | false | any parameters **(will be returned on webhook)** |
-customer | object | false | { "phone", "cpf", "name", "email" } |
-external_history | string | false | valid url that GET a JSON |
-
-Example:
 ```
 {
-  "token": "y0urC1ientSdkT0ken",
+  "token": "yourAPIToken",
   "media_type": "TEXT",
   "department_id": 1,
   "customer": {
     "name": "Name Surname",
-    "email": "nameo@example.com",
+    "email": "name@example.com",
     "phone": "11991417777",
     "cpf": "12345678900"
   },
   "extra" : {
     "clientId": "any",
-    "botId": "parameter"
+    "botId": "any"
   },
   "external_history": "https://test.com"
 }
 ```
-Valid Response:
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+department_id | integer | **true** | Id of an active department from your account | - |
+media_type | string | false | Type of media | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+extra | object | false | Any parameters **(will be returned on webhook)** | - |
+customer | object | false | Your customer information | { "phone", "cpf", "name", "email" } |
+external_history | string | false | URL that can GET a JSON | - |
+
+Success Response:
 ```
 {
   "message": "Interaction created successfully",
@@ -74,17 +64,7 @@ Error Response:
 #### External History
 Endpoint that **GET** a JSON:
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-messages | array of objects | **true** | objects with "time", "direction" and "content"|
-
-Messages Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-time | datetime | **true** | any datetime |
-direction | string | **true** | CLIENT, AGENT |
-content | string | **true** | any string |
-
-Example:
+Response:
 ```
 {
   "messages":[
@@ -101,23 +81,22 @@ Example:
   ]
 }
 ```
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+messages | array of objects | **true** | Array of message objects | - |
+time | datetime | **true** | When the message was recorded | - |
+direction | string | **true** | Who sent the mesage | "CLIENT" or "AGENT" |
+content | string | **true** | Content of the message | - |
 
 #### Update interaction
-Make **PUT** HTTP request:
+Make HTTP **PUT** request:
 ```
 https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}
 ```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
 Body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token
-mood | string | false | "POSITIVE", "NEGATIVE"
-tag_ids | array | false | your tag_ids
-customer_key | string | false | your existing customer
-note | string | false | any string
-
-Example:
 ```
 {
   "token": "y0UrCl1EntSdk",
@@ -127,8 +106,15 @@ Example:
   "note": "any note here"
 }
 ```
+Parameter | Type | Required | Valid Attributes |
+------------ | ------------- | ------------- | ------------- |
+token | string | **true** | your clientSdk token
+mood | string | false | "POSITIVE", "NEGATIVE"
+tag_ids | array | false | your tag_ids
+customer_key | string | false | your existing customer
+note | string | false | any string
 
-Valid Response:
+Success Response:
 ```
 {
     "message": "Interaction updated successfully",
@@ -144,28 +130,29 @@ Error Response:
 ```
 
 #### Send message
-Make **POST** HTTP request:
+Make HTTP **POST** request:
 ```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/messages
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/messages
 ```
-body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-content | string | **true** | any string |
-type | string | false | text, image, video, audio, file **(null will be saved as text)** |
-
-Example:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
+Body:
 ```
 {
-  "token": "yourC1ientSdkT0ken",
+  "token": "yourAPIToken",
   "content": "your message",
   "type": "image",
   "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png"
 }
 ```
-Valid Response:
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+content | string | **true** | Your message | - |
+type | string | false | Type of the content |text, image, video, audio, file **(null will be saved as text)** |
+url | string | **false** | File URL (except for "text" type) | - |
+Success Response:
 ```
 {
     "data": {
@@ -184,38 +171,62 @@ Error Response:
 ```
 
 #### Notify when client typing
-Make **PUT** HTTP request:
+Make HTTP **PUT** request:
 ```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/typing
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/typing
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
+Body:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
 
 #### Notify when client stop typing
 Make **PUT** HTTP request:
 ```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/cleared
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/cleared
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
+Body:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
 
 
 #### Finish interaction
 Make **PUT** HTTP request:
 ```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/finish
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/finish
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
+Body:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
 
 
 ## Triggers
