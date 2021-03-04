@@ -1,13 +1,23 @@
-#### Get Departments
+# Departments API
+To get the access token, go to:
+```
+https://zchat-admin.zenvia.com
+```
+Then go to:
+```
+Menu > Settings > Integrations > API
+```
+Click on 'Generate Token' to obtain a new one.
+## Get Departments
 Make HTTP **GET** request:
 ```
 https://zchat.zenvia.io/api/external/departments?token={yourAPIToken}
 ```
-| Parameter  | Type  | Required  | Description | Default Attributes |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
-| token | string | **true** | Your API token | -|
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
 
-Success Response Example:
+<br> Success Response Example:
 ```
 [
   {
@@ -25,7 +35,7 @@ Success Response Example:
       {
         "id": 9999,
         "name": "Agent Name",
-        "photo": "https://omz-photo.s3.amazonaws.com/agent.png"
+        "photo": "https://file-address.example.com.com/agent.png"
       }
     ],
     "channels": [
@@ -52,3 +62,11 @@ change_date | When was the department last changed
 state | 1 - Active, 0 - Inactive
 agents | List of agents from this department
 channels | List of channels registered for this department
+
+<br> Error Response:
+```
+{
+  "status": 404,
+  "message": "Error Message Here"
+}
+```

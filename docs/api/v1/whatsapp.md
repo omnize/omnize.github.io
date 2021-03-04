@@ -1,49 +1,49 @@
-## Whatsapp Api V1
-To get access token and set webhook url to receive, access:
+# Whatsapp Api
+To get the access token, go to:
+```
+https://zchat-admin.zenvia.com
+```
+Then go to:
+```
+Menu > Settings > Integrations > API
+```
+Click on 'Generate Token' to obtain a new one.
 
-    https://zchat-admin.zenvia.com
+## Send message
+Make HTTP **POST** request:
 
-Go to:
+    https://zchat.zenvia.io/core/api/v1/whatsapp
 
-    Menu > Settings > Integrations > ClientSDK
-
-Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
-
-
-#### Get Departments
-Make HTTP request:
-
-    GET https://zchat.zenvia.io/api/external/departments?token=jh2kj3k12j3hk1j
-
-
-#### Send message
-Make HTTP request:
-
-    POST https://zchat.zenvia.io/core/api/v1/whatsapp
-
-With body:
+Body Example:
 
     {
-      "token": "j23hk4j2h3kj4h...",
-      "content": "Test message",
-      "content_type": "image/png", // Optional, used to send media files. Default 'text'
-      "url": ".....", // Optional, link for the media source used if content_type is different of 'text'
+      "token": "yourAPIToken",
+      "content": "Message",
+      "content_type": "image/png",
+      "url": "https://file-address.example.com/logo.png",
       "department_id": 1,
       "customer": {
-        "name": "abcd1234" //Optional
-        "email": "abcd1234" //Optional
-        "phone": "abcd1234" //Optional
-        "cpf": "abcd1234" //Optional
-        "external_id": "abcd1234" //Required
+        "name": "Name Surname",
+        "email": "customer@email.com",
+        "phone": "123456789",
+        "cpf": "123456789",
+        "external_id": "123456",
       },
-      "extra" : { // Optional, returned on webhook
-        "clientId": "12",
+      "extra" : {
+        "clientId": "1",
         "botId": "1111"
       },
-	  "external_history": "chathistory.example.org" // Optional
+	  "external_history": "https://chat-history.example.com"
     }
-
-Response:
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+department_id | integer | **true** | Id of an active department from your account | - |
+media_type | string | **false** | Type of media | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+extra | object | **false** | Any parameters **(will be returned on webhook)** | - |
+customer | object | **false** | Your customer information | { "phone", "cpf", "name", "email" } |
+external_history | string | **false** | URL that can GET a JSON | - |
+<br>Success Response:
 
     {
       "message": "Message sent successfully",
@@ -51,8 +51,17 @@ Response:
 
 
 ## Triggers
+To set up a webhook URL, access:
+```
+https://zchat-admin.zenvia.com
+```
+Go to:
+```
+Menu > Settings > Integrations > Weebhooks
+```
+Add your URL to receive the trigger events.
 
-####  Agent finish interaction:
+###  Agent finish interaction:
 
     {
       "external_id": "abcd1234",
@@ -60,7 +69,7 @@ Response:
       "state": "finished"
     }
 
-####  Agent typing:
+###  Agent typing:
 
     {
       "external_id": "abcd1234",
@@ -68,7 +77,7 @@ Response:
       "state": "typing"
     }
 
-####  Agent stop typing:
+###  Agent stop typing:
 
     {
       "external_id": "abcd1234",
@@ -76,7 +85,7 @@ Response:
       "state": "cleared"
     }
 
-#### Agent new message:
+### Agent new message:
 
     {
       "external_id": "abcd1234",
@@ -91,7 +100,7 @@ Response:
       }
     }
 
-#### Agent transfer interaction to department
+### Agent transfer interaction to department
 
     {
       "external_id": "abcd1234",

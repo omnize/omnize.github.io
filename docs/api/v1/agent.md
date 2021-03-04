@@ -1,23 +1,31 @@
-## Agent Api V1
-
-#### Get Online Agents
- Make **GET** HTTP request:
+# Agent Api
+To get the access token, go to:
 ```
- https://zchat.zenvia.io/core/api/v1/agents/online?token={yourClientSdkToken}&department_id={yourDepartmentId}
+https://zchat-admin.zenvia.com
 ```
-Parameter  | Required |
-------------  | -------------
-token | **true**
- department_id | false
+Then go to:
+```
+Menu > Settings > Integrations > API
+```
+Click on 'Generate Token' to obtain a new one.
+## Get Online Agents
+ Make HTTP **GET** request:
+```
+ https://zchat.zenvia.io/core/api/v1/agents/online?token={yourAPIToken}&department_id={departmentId}
+```
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
+| department_id | **false** | Id of an active department | - |
 
-Success Response:
+<br> Success Response Example:
 ```
 {
     "agents": [
         {
-            "id": 999,
+            "id": 9999,
             "name": "Agent Name",
-            "photo": "https://omz-photo.s3.amazonaws.com/agent.png"
+            "photo": "https://file-address.example.com/agent.png"
         }
     ],
     "averageService": 60,
@@ -27,11 +35,11 @@ Success Response:
 ```
 Response Parameter  | Description |
 ------------  | -------------
-agents | list of online agents - returns **max** of 3 **random** agents
-averageService | average time to answer last 100 interactions in **seconds**
-count | **total** of agents online
+agents | List of online agents - returns **max** of 3 **random** agents
+averageService | Average agent answering time of the last 100 interactions (in **seconds**)
+count | **Total** of agents online
 
-Error Response:
+<br> Error Response:
 ```
 {
     "message": "Error description here",
@@ -39,22 +47,22 @@ Error Response:
 {
 ```
 
-#### List Agents
- Make **GET** HTTP request:
+## List Agents
+ Make HTTP **GET** request:
 ```
-https://zchat.zenvia.io/api/external/agents?token={yourClientSdkToken}
+https://zchat.zenvia.io/api/external/agents?token={yourAPIToken}
 ```
-Parameter  | Required |
-------------  | -------------
-token | **true**
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
 
-Valid Response:
+<br> Success Response Example:
 ```
 [
     {
-        "id": id,
+        "id": 99999,
         "name": "Agent Name",
-        "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
+        "photo": "https://file-address.example.com/agent.png",
         "phone_extension": null,
         "signature": null,
         "email": "agent@company.com",
@@ -64,28 +72,35 @@ Valid Response:
         "new_status": "OFFLINE",
         "department": {
             "name": "Atendimento",
-            "id": department_id
+            "id": 99999
         }
     }
 ]
 ```
-
-#### Get Agent
- Make **GET** HTTP request:
-```
-https://zchat.zenvia.io/api/external/agents/{agent_id}?token={yourClientSdkToken}
-```
-Parameter  | Required |
-------------  | -------------
-token | **true**
-agent_id | **true**
-
-Valid Response:
+<br> Error Response:
 ```
 {
-    "id": id,
+  "status": 404,
+  "message": "Error Message Here"
+}
+```
+
+## Get Agent
+ Make HTTP **GET** request:
+```
+https://zchat.zenvia.io/api/external/agents/{agentId}?token={yourAPIToken}
+```
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
+| agent_id | **true** | Id of an agent | - |
+
+<br> Success Response Example:
+```
+{
+    "id": 9999,
     "name": "Agent Name",
-    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
+    "photo": "https://file-address.example.com/agent.png",
     "phone_extension": null,
     "signature": null,
     "email": "agent@company.com",
@@ -95,32 +110,50 @@ Valid Response:
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",
-        "id": department_id
+        "id": 9999
     }
 }
 ```
+<br> Error Response:
+```
+{
+  "status": 404,
+  "message": "Error Message Here"
+}
+```
 
-#### Create Agent
- Make **POST** HTTP request:
+## Create Agent
+ Make HTTP **POST**  request:
 ```
 https://zchat.zenvia.io/api/external/agents
 ```
-Parameter  | Required |
-------------  | -------------
-token | **true**
-name | **true**
-email | **true**
-password | **true**
-profile | ["ADMIN","AGENT"]
-text_limit | false
-
-
-Valid Response:
+Body Example:
 ```
 {
-    "id": id,
+	"token": "YourApiToken",
+	"name": "Agent Name",
+	"email": "agent@company.com",
+	"password": "123456",
+	"profile": "AGENT",
+    "text_limit": "10"
+}
+```
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+name | string | **true** | Agent's name | - |
+email | string | **true** | Agent's email | - |
+password | string | **true** | Agent's password | - |
+profile | string | **true** | Level of permission this agent will have |"ADMIN" or "AGENT"
+text_limit | string | **false** | Text limit | - |
+
+
+Success Response Example:
+```
+{
+    "id": 9999,
     "name": "Agent Name",
-    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
+    "photo": "https://file-address.example.com/agent.png",
     "phone_extension": null,
     "signature": null,
     "email": "agent@company.com",
@@ -130,34 +163,55 @@ Valid Response:
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",
-        "id": department_id
+        "id": 9999
     }
 }
 ```
-
-
-#### Update Agent
- Make **PUT** HTTP request:
-```
-https://zchat.zenvia.io/api/external/agents/{agent_id}
-```
-Parameter  | Required |
-------------  | -------------
-token | **true**
-agent_id | **true**
-name | false
-email | false
-password | false
-profile | false
-text_limit | false
-
-
-Valid Response:
+Error Response:
 ```
 {
-    "id": id,
+  "status": 200,
+  "success": false,
+  "errors": [
+    "Error description here"
+  ]
+}
+```
+
+## Update Agent
+ Make HTTP **PUT** request:
+```
+https://zchat.zenvia.io/api/external/agents/{agentId}
+```
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| agent_id | **true** | Id of an agent | - |
+<br> Body Example:
+```
+{
+	"token": "YourApiToken",
+	"name": "Agent Name",
+	"email": "agent@company.com",
+	"password": "123456",
+	"profile": "AGENT",
+    "text_limit": "10"
+}
+```
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+name | string | **false** | Agent's name | - |
+email | string | **false** | Agent's email | - |
+password | string | **false** | Agent's password | - |
+profile | string | **false** | Level of permission this agent will have |"ADMIN" or "AGENT"
+text_limit | string | **false** | Text limit | - |
+
+<br> Success Response Example:
+```
+{
+    "id": 9999,
     "name": "Agent Name",
-    "photo": "https://omz-photo.s3.amazonaws.com/agent.png",
+    "photo": "https://file-address.example.com/agent.png",
     "phone_extension": null,
     "signature": null,
     "email": "agent@company.com",
@@ -167,7 +221,14 @@ Valid Response:
     "new_status": "OFFLINE",
     "department": {
         "name": "Atendimento",
-        "id": department_id
+        "id": 9999
     }
+}
+```
+<br> Error Response:
+```
+{
+  "status": 404,
+  "message": "Error Message Here"
 }
 ```

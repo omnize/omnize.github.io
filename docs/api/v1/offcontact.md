@@ -1,44 +1,49 @@
-## Offcontact Api V1
-#### Create offcontact
-Make **POST** HTTP request:
+# Offcontact Api
+To get the access token, go to:
+```
+https://zchat-admin.zenvia.com
+```
+Then go to:
+```
+Menu > Settings > Integrations > API
+```
+Click on 'Generate Token' to obtain a new one.
+## Create offcontact
+Make HTTP **POST** request:
 ```
  https://zchat.zenvia.io/core/api/v1/offcontact
 ```
-Body
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | -------------
-content | string | **true** | any string
-content_type | string | false | audio, image, text, video, file, **(null will be saved as text)**
-department_id | integer | **true** | any department_id from account
-token | string | **true** | your clientSdk token
-url | string | false | valid url
-customer | object | **true** | { "phone", "cpf", "name", "email" }
-
-Customer Parameter | Type | Required |
------------- | ------------- | -------------
-phone | string | false
-cpf | string | false
-name | string | false
-email | string | **true**
-
-Example:
+Body Example:
 ```
     {
-    "content": "your offcontact content",
+    "content": "offcontact message",
     "content_type": "image",
     "customer": {
         "phone": "1199900999",
         "cpf": "12345678900",
         "name": "Name Surname",
-        "email": "customer@omnize.com"
+        "email": "customer@email.com"
     },
     "department_id": 1,
-    "token": "y0ur-Client5DK-t0ken",
-    "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png"
+    "token": "yourApiToken",
+    "url": "https://file-address.example.com/logo.png"
     }
 ```
-Valid Response:
+
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | -------------
+content | string | **true** | Offcontact message content | - |
+content_type | string | **false** | Type of the content | audio, image, text, video, file, **(null will be saved as text)** |
+department_id | integer | **true** | Id of an active department | - |
+token | string | **true** | Your API token | - |
+url | string | **false** |  File URL (except for "text" type message) | - | 
+customer | object | **true** | Customer's information | { "phone", "cpf", "name", "email" }
+phone | string | **false** | Customer's telephone number | - |
+cpf | string | **false** | Customer's document number | - |
+name | string | **false** | Customer's name | - |
+email | string | **true** | Customer's email | - |
+
+<br> Success Response Example:
 ```
 {
     "message": "Offcontact sent",
