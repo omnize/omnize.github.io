@@ -40,6 +40,10 @@ department_id | integer | **true** | Id of an active department from your accoun
 media_type | string | **false** | Type of media | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
 extra | object | **false** | Any parameters **(will be returned on webhook)** | - |
 customer | object | **false** | Your customer information | { "phone", "cpf", "name", "email" } |
+name | string | **false** | Customer's name | - |
+email | string | **false** | Customer's email | - |
+phone | string | **false** | Customer's phone | - |
+cpf | string | **false** | Customer's document | - |
 external_history | string | **false** | URL that can GET a JSON | - |
 
 Success Response:

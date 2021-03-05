@@ -38,10 +38,17 @@ Body Example:
 Parameter | Type | Required | Description | Default Attributes |
 ------------ | ------------- | ------------- | ------------- | ------------- |
 token | string | **true** | Your API token | - |
+content | string | **false** | Message content | - |
+content_type | string | **false** | Type of the content | audio, image, text, video, file, **(null will be saved as text)** |
+url | string | **false** |  File URL (except for "text" type message) | - | 
 department_id | integer | **true** | Id of an active department from your account | - |
-media_type | string | **false** | Type of media | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+customer | object | **true** | Your customer information | { "phone", "cpf", "name", "email", "external_id" } |
+name | string | **false** | Customer's name | - |
+email | string | **false** | Customer's email | - |
+phone | string | **false** | Customer's phone | - |
+cpf | string | **false** | Customer's document | - |
+external_id | string | **true** | Customer's id in an external system | - |
 extra | object | **false** | Any parameters **(will be returned on webhook)** | - |
-customer | object | **false** | Your customer information | { "phone", "cpf", "name", "email" } |
 external_history | string | **false** | URL that can GET a JSON | - |
 <br>Success Response:
 
