@@ -1,59 +1,52 @@
-## ClientApi V1
-To get access token and set webhook url to receive, access:
+# Interactions API
+To get the access token, go to:
 ```
 https://zchat-admin.zenvia.com
 ```
-Go to:
+Then go to:
 ```
-Menu > Settings > Integrations > ClientSDK
+Menu > Settings > Integrations > API
 ```
-Click on 'Generate Token' to obtain a new one, after that set the 'Webhook URL' to receive the triggers events.
+Click on 'Generate Token' to obtain a new one.
 
-#### Get Departments
-Make **GET** HTTP request:
-```
-https://zchat.zenvia.io/api/external/departments?token={yourClientSdkToken}
-```
-Parameter  | Required |
-------------  | ------------- |
-token | **true** |
-
-#### Start interaction
-Make **POST** HTTP request:
+## Start interaction
+Make HTTP **POST** request:
 ```
 https://zchat.zenvia.io/core/api/v1/interactions
 ```
-Body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-department_id | integer | **true** | any active department_id from your account |
-media_type | string | false | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
-extra | object | false | any parameters **(will be returned on webhook)** |
-customer | object | false | { "phone", "cpf", "name", "email" } |
-external_history | string | false | valid url that GET a JSON |
-
-Example:
+Body Example:
 ```
 {
-  "token": "y0urC1ientSdkT0ken",
+  "token": "YourApiToken",
   "media_type": "TEXT",
-  "department_id": 1,
+  "department_id": 9999,
   "customer": {
     "name": "Name Surname",
-    "email": "nameo@example.com",
+    "email": "name@example.com",
     "phone": "11991417777",
     "cpf": "12345678900"
   },
   "extra" : {
-    "clientId": "any",
-    "botId": "parameter"
+    "clientId": "1",
+    "botId": "1111"
   },
-  "external_history": "https://test.com"
+  "external_history": "https://chat-history.example.com"
 }
 ```
-Valid Response:
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+department_id | integer | **true** | Id of an active department from your account | - |
+media_type | string | **false** | Type of media | TEXT, SMS, WHATSAPP  **(null will be saved as TEXT)** |
+extra | object | **false** | Any parameters **(will be returned on webhook)** | - |
+customer | object | **false** | Your customer information | { "phone", "cpf", "name", "email" } |
+name | string | **false** | Customer's name | - |
+email | string | **false** | Customer's email | - |
+phone | string | **false** | Customer's phone | - |
+cpf | string | **false** | Customer's document | - |
+external_history | string | **false** | URL that can GET a JSON | - |
+
+Success Response:
 ```
 {
   "message": "Interaction created successfully",
@@ -70,21 +63,170 @@ Error Response:
     "status": 422
 }
 ```
+## Update interaction
+Make HTTP **PUT** request:
+```
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}
+```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique id for the interaction (UUID) | - |
+<br> Body Example:
+```
+{
+  "token": "YourApiToken",
+  "mood": "POSITIVE",
+  "tag_ids": ["1", "999"],
+  "customer_key": "0010-abcd-efgh-ijkd-1c422e49fdff",
+  "note": "Any note here"
+}
+```
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+mood | string | **false** | Service evaluation | "POSITIVE" or "NEGATIVE" |
+tag_ids | array | **false** | Ids of the tags used in this interaction 
+customer_key | string | **false** | Id of a customer (UUID) | - |
+note | string | **false** | any string
 
-#### External History
+Success Response:
+```
+{
+    "message": "Interaction updated successfully",
+    "status": 200
+}
+```
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
+
+## Send message
+Make HTTP **POST** request:
+```
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/messages
+```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
+<br> Body Example: 
+```
+{
+  "token": "yourAPIToken",
+  "content": "your message",
+  "type": "image",
+  "url": "https://file-address.example.com/logo.png"
+}
+```
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+content | string | **true** | Your message | - |
+type | string | **false** | Type of the content |text, image, video, audio, file **(null will be saved as text)** |
+url | string | **false** | File URL (except for "text" type message) | - |
+<br> Success Response Example:
+```
+{
+    "data": {
+        "interaction_hash": "0010-abcd-efgh-ijkd-1c422e49fdff"
+    },
+    "message": "Message created successfully",
+    "status": 200
+}
+```
+Error Response:
+```
+{
+    "message": "Error description here",
+    "status": 422
+}
+```
+
+## Notify when client typing
+Make HTTP **PUT** request:
+```
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/typing
+```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
+
+Body Example:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+<br> Success Response:
+```
+{
+  "message": "Typing sent successfully",
+  "status": 200
+}
+```
+
+## Notify when client stop typing
+Make HTTP **PUT** request:
+```
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/cleared
+```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID format) | - |
+
+Body Example:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+<br> Success Response:
+```
+{
+  "message": "Cleared sent successfully",
+  "status": 200
+}
+```
+
+## Finish Interaction
+Make HTTP **PUT** request:
+```
+https://zchat.zenvia.io/core/api/v1/interactions/{interactionHash}/finish
+```
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
+
+Body Example:
+```
+{
+  "token": "YourApiToken"
+}
+```
+Parameter | Type | Required | Description |Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+<br> Success Response:
+```
+{
+  "message": "Finish sent successfully",
+  "status": 200
+}
+```
+
+## External History
 Endpoint that **GET** a JSON:
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-messages | array of objects | **true** | objects with "time", "direction" and "content"|
-
-Messages Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-time | datetime | **true** | any datetime |
-direction | string | **true** | CLIENT, AGENT |
-content | string | **true** | any string |
-
-Example:
+Response:
 ```
 {
   "messages":[
@@ -101,126 +243,27 @@ Example:
   ]
 }
 ```
-
-#### Update interaction
-Make **PUT** HTTP request:
-```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}
-```
-Body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token
-mood | string | false | "POSITIVE", "NEGATIVE"
-tag_ids | array | false | your tag_ids
-customer_key | string | false | your existing customer
-note | string | false | any string
-
-Example:
-```
-{
-  "token": "y0UrCl1EntSdk",
-  "mood": "POSITIVE",
-  "tag_ids": ["1", "999"],
-  "customer_key": "0010-abcd-efgh-ijkd-1c422e49fdff",
-  "note": "any note here"
-}
-```
-
-Valid Response:
-```
-{
-    "message": "Interaction updated successfully",
-    "status": 200
-}
-```
-Error Response:
-```
-{
-    "message": "Error description here",
-    "status": 422
-}
-```
-
-#### Send message
-Make **POST** HTTP request:
-```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/messages
-```
-body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-content | string | **true** | any string |
-type | string | false | text, image, video, audio, file **(null will be saved as text)** |
-
-Example:
-```
-{
-  "token": "yourC1ientSdkT0ken",
-  "content": "your message",
-  "type": "image",
-  "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png"
-}
-```
-Valid Response:
-```
-{
-    "data": {
-        "interaction_hash": "interaction_hash"
-    },
-    "message": "Message created successfully",
-    "status": 200
-}
-```
-Error Response:
-```
-{
-    "message": "Error description here",
-    "status": 422
-}
-```
-
-#### Notify when client typing
-Make **PUT** HTTP request:
-```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/typing
-```
-body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-
-#### Notify when client stop typing
-Make **PUT** HTTP request:
-```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/cleared
-```
-body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-
-
-#### Finish interaction
-Make **PUT** HTTP request:
-```
-https://zchat.zenvia.io/core/api/v1/interactions/{interaction_hash}/finish
-```
-body:
-
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+messages | array | **true** | Array of message objects | - |
+time | datetime | **true** | When the message was recorded | - |
+direction | string | **true** | Who sent the mesage | "CLIENT" or "AGENT" |
+content | string | **true** | Content of the message | - |
+<br>
 
 ## Triggers
 
-#### Interaction added to queue
+To set up a webhook URL, access:
+```
+https://zchat-admin.zenvia.com
+```
+Go to:
+```
+Menu > Settings > Integrations > Weebhooks
+```
+Add your URL to receive the trigger events.
+
+### Interaction added to queue
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -229,7 +272,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-#### Agent accepts interaction
+### Agent accepts interaction
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -237,7 +280,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-#### In case of unavailable agents:
+### In case of unavailable agents:
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -245,7 +288,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-####  Agent finish interaction:
+###  Agent finish interaction:
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -253,7 +296,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-####  Agent typing:
+###  Agent typing:
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -261,7 +304,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-####  Agent stop typing:
+###  Agent stop typing:
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",
@@ -269,7 +312,7 @@ token | string | **true** | your clientSdk token |
       "extra": {}
     }
 
-#### Agent new message:
+### Agent new message:
 
     {
       "interaction_hash": "322e458c-540c-4c11-ab5c-d38d39f57213",

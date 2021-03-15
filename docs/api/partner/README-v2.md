@@ -1,22 +1,22 @@
-## Partner API V2
+# Partner API
 
-### Retrieve agents
-  Accepted params:
-  ```
-  token: partner_token (required)
-  account_id: account_id (required)
-  column: order by column (id name email) default: id
-  direction: order by (desc asc) default: desc
-  page: pagination of agents (>=1) default: 1
-  limit: limit number of return agents default: 20
-  search: search by (id name or email)
-  ```
-  Make HTTP request:
+## List Agents
+
+  Make HTTP **GET** request:
  ```
-    GET https://zchat.zenvia.io/partner/api/agents?token=hj4h2k3h4k23&account_id=1&search=test@gmail&column=name&direction=asc&page=1&limit=10
-```
+  https://zchat.zenvia.io/partner/api/agents?token={youApiTYoken}&account_id={accountId}&search={searchParamenter}&column={orderParameter}&direction={orderDirection}&page={page}&limit={limit}
+  ```
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
+| account_id | **true** | Id of an account | - |
+| search | **false** | Filter agents | "name" or "email" |
+| column | **false** | Order agents | "id", "name"  or "email" (default: "id") |
+| direction | **false** | Descending or ascending order | "desc" or "asc" (default: desc) |
+| page | **false** | Number of the page  | >=1 (default:20) |
+| limit | **false** | Max number of agents per page  | Any integer number (default:20) |
 
-Response, success:
+Success Response Example:
 
     {
       "status": 200,
@@ -25,7 +25,7 @@ Response, success:
         {
           "id": 1,
           "name": "Agent Name",
-          "photo": null, // Url
+          "photo": "https://file-address.example.com/agent.png",
           "phone_extension": null,
           "signature": null,
           "email": "agent@example.com",
@@ -39,40 +39,40 @@ Response, success:
           ],
           "status": "OFFLINE",
           "profile": "ADMIN",
-          "created_at": null,
-          "updated_at": null
+          "created_at": "2021-03-02T19:24:32.417Z",
+          "updated_at": "2021-03-02T19:24:32.417Z"
         }
       ]
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
 
-### Show agent
-  Accepted params:
-  ```
-  token: partner_token (required)
-  account_id: account_id (required)
-  ```
-  Make HTTP request:
- ```
-    GET https://zchat.zenvia.io/partner/api/agents/:id?token=hj4h2k3h4k23&account_id=1
+## Show Agent
+Make HTTP **GET** request:
 ```
+https://zchat.zenvia.io/partner/api/agents/{id}?token={yourApiToken}&account_id={accountId}
+```
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
+| account_id | **true** | Id of an account | - |
+| id | **true** | Id of an agent from this account | - |
 
-Response, success:
+Success Response Example:
 
     {
-      status: 200,
-      success: true,
-      agent: { 
+      "status": 200,
+      "success": true,
+      "agent": { 
         "id": 1,
         "name": "Agent Name",
-        "photo": null, // Url
+        "photo": "https://file-address.example.com/agent.png",
         "phone_extension": null,
         "signature": null,
         "email": "agent@example.com",
@@ -85,105 +85,58 @@ Response, success:
           }
         ],
         "status": "OFFLINE",
-        "profile": "ADMIN",
-        "created_at": null,
-        "updated_at": null
+        "profile": "AGENT",
+        "created_at": "2019-11-21T18:44:13.628Z",,
+        "updated_at": "2021-02-26T14:37:35.000Z"
       }
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
 
 
-### Create Agent
-Make HTTP request:
+## Create Agent
+Make HTTP **POST** request:
 
-    POST https://zchat.zenvia.io/partner/api/agents
+    https://zchat.zenvia.io/partner/api/agents
 
-With body:
+Body Example:
 
     {
-      token: 'j423j42jn3kj4n',
-      profile: 'ADMIN', // 'ADMIN' or 'AGENT'
-      department_ids: [1,22,333]
-      agent: {
-        email: 'test@example.com', // Email used to login
-        name: 'Test Agent',
-        password: 'j2hk2j3h4kj23h4kjh2k34', // Plain text signed as SHA256 hash
-        text_limit: 7, // optional 
-        account_id: 1111
+      "token": "yourApiToken",
+      "profile": "ADMIN",
+      "department_ids": [1,22,333],
+      "agent": {
+        "email": "test@example.com",
+        "name": "Test Agent",
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "text_limit": 7,
+        "account_id": 1111
       }
     }
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+profile | string | **false** | Level of permission this agent will have |"ADMIN" or "AGENT" (**null will be saved as "AGENT"**) |
+department_ids | array | **false** | Ids of this agent's departments (null will add to first account department) | - |
+agent | object | **true** | Agent's data | { "name", "email", "password", "text_limit" } |
+name | string | **true** | Agent's name | - |
+email | string | **true** | Agent's email | - |
+password | string | **true** | Agent's password signed as SHA256 hash | - |
+text_limit | string | **false** | Text limit | - |
+account_id | integer | **true** | Id of this agent's account | - |
 
-Without parameter profile, will create a AGENT profile
-Without parameter department_ids, will add agent to first account department
-
-Response, success:
-
-    {
-      status: 200,
-      success: true,
-      agent: {
-        "id": 1,
-        "name": "Agent Name",
-        "photo": null,
-        "phone_extension": null,
-        "signature": null,
-        "email": "agent@example.com",
-        "deleted_at": null,
-        "active": true,
-        "departments": [
-          {
-            "id": 1,
-            "name": "Atendimento"
-          }
-        ],
-        "status": "OFFLINE",
-        "profile": "ADMIN",
-        "created_at": "2020-10-21T12:46:12.648Z",
-        "updated_at": "2020-10-21T12:46:12.648Z"
-      }
-    }
-
-In case of errors:
+Success Response Example:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
-    }
-
-### Update Agent
-Make a HTTP request:
-
-    PUT https://zchat.zenvia.io/partner/api/agents/:id
-
-With body:
-
-    {
-      token: 'j423j42jn3kj4n',
-      profile: 'ADMIN', // 'ADMIN' or 'AGENT'
-      agent: {
-        account_id: 1111,
-        email: 'update@example.com',
-        name: 'New Name',
-        text_limit: 7, // optional 
-        password: 'j2hk2j3h4kj23h4kjh2k34' // Plain text signed as SHA256 hash,
-        active: true  
-      }
-    }
-
-Response, success:
-
-    {
-      status: 200,
-      success: true,
-      agent: {
+      "status": 200,
+      "success": true,
+      "agent": {
         "id": 1,
         "name": "Agent Name",
         "photo": null,
@@ -205,66 +158,137 @@ Response, success:
       }
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "E-mail can be blank"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
+    }
+
+## Update Agent
+Make a HTTP **PUT** request:
+
+    https://zchat.zenvia.io/partner/api/agents/{id}
+
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| id | **true** | Id of the agent that will be updated | - |
+
+Body Example:
+
+    {
+      "token: 'YourApiToken',
+      "profile": 'ADMIN',
+      "agent": {
+        "account_id": 1111,
+        "email": "update@example.com",
+        "name": "New Name",
+        "text_limit": 7,
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "active": true  
+      }
+    }
+
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+profile | string | **false** | Level of permission this agent will have |"ADMIN" or "AGENT" (**null will be saved as "AGENT"**) |
+department_ids | array | **false** | Ids of this agent's departments (null will add to first account department) | - |
+agent | object | **true** | Agent's data | { "name", "email", "password", "text_limit" } |
+name | string | **true** | Agent's name | - |
+email | string | **true** | Agent's email | - |
+password | string | **true** | Agent's password signed as SHA256 hash | - |
+text_limit | string | **false** | Text limit | - |
+account_id | integer | **true** | Id of this agent's account | - |
+
+Success Response Example:
+
+    {
+      "status": 200,
+      "success": true,
+      "agent": {
+        "id": 1,
+        "name": "Agent Name",
+        "photo": null,
+        "phone_extension": null,
+        "signature": null,
+        "email": "agent@example.com",
+        "deleted_at": null,
+        "active": true,
+        "departments": [
+          {
+            "id": 1,
+            "name": "Atendimento"
+          }
+        ],
+        "status": "OFFLINE",
+        "profile": "ADMIN",
+        "created_at": "2020-10-21T12:46:12.648Z",
+        "updated_at": "2020-10-21T12:46:12.648Z"
+      }
+    }
+
+Error Response:
+
+    {
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
     
 
-### Delete Agent
-Make HTTP request:
+## Delete Agent
+Make HTTP **DELETE** request:
 
-    DELETE https://zchat.zenvia.io/partner/api/agents/:id
+    https://zchat.zenvia.io/partner/api/agents/{id}
 
 With body:
 
     {
-      token: 'hj4h2k3h4k23'
+      "token": "YourApiToken",
+      "agent": {
+        "account_id": 1111
+      }
     }
 
-Response, success:
+Success Response:
 
     {
-      status: 200,
-      success: true,
-      message: "Agent deleted successfully"
+      "status": 200,
+      "success": true,
+      "message": "Agent deleted successfully"
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
 
-## Manage Departments
+## List Departments
 
-### Retrieve all
+Make HTTP **GET** request:
 
-  Accepted params:
-  ```
-  token: partner_token (required)
-  account_id: account_id (required)
-  column: order by column (id name email) default: id
-  direction: order by (desc asc) default: desc
-  page: pagination of agents (>=1) default: 1
-  limit: limit number of return agents default: 20
-  search: search by (id or name)
-  ```
+    https://zchat.zenvia.io/partner/api/departments?token={yourApiToken}&account_id={accountId}&search={searchParamenter}&column={orderParameter}&direction={orderDirection}&page={page}&limit={limit}
 
-Make HTTP request:
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| token | **true** | Your API token | - |
+| account_id | **true** | Id of an account | - |
+| search | **false** | Filter departments | "name" or "id" |
+| column | **false** | Order departments | "name" or "id"  (default: "id") |
+| direction | **false** | Descending or ascending order | "desc" or "asc" (default: desc) |
+| page | **false** | Number of the page  | >=1 (default:20) |
+| limit | **false** | Max number of departments per page  | Any integer number (default:20) |
 
-    GET https://zchat.zenvia.io/partner/api/departments?token=hj4h2k3h4k23&account_id=1
-
-Response, success:
+<br> Success Response Example:
 
     {
-      status: 200
-      departments: [
+      "status": 200
+      "departments": [
         {
           "active": true,
           "description": "Atendimento",
@@ -276,7 +300,7 @@ Response, success:
           "queue_position_time": null,
           "deleted_at": null,
           "agents": 2,
-          "created_at": null,
+          "created_at": "2018-01-02T19:28:41.000Z",
           "updated_at": "2018-01-04T19:28:41.000Z",
           "channels": [
             {
@@ -299,34 +323,43 @@ Response, success:
       ]
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
 
 
-### Create
-Make HTTP request:
+## Create Department
+Make HTTP **POST** request:
 
-    POST https://zchat.zenvia.io/partner/api/departments
+    https://zchat.zenvia.io/partner/api/departments
 
-With body:
+Body Example:
 
     {
-      token: 'hj4h2k3h4k23',
-      agent_ids: [1,22,33],
-      channels: ["chat"],
-      department: {
-        account_id: 1,
-        name: "New Department",
-        description: "A new created department"
+      "token": "yourApiToken",
+      "agent_ids": [1,22,33],
+      "channels": ["chat"],
+      "department": {
+        "account_id": 1,
+        "name": "New Department",
+        "description": "A new created department"
       }
     }
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+agent_ids | array | **false** | List of agent's id for this department | - |
+channels | array | **false** | List of channels for this department | "chat", "video", "audio" |
+department | object | **true** | The department data | { "account_id", "name", "description" } |
+account_id | integer | **true** | Account id for this department | - |
+name | string | **false** | Name of the department | - |
+description | string | **false** | Description of the department | - |
 
-Response, success:
+<br> Success Response Example:
 
     {
       "status": 200,
@@ -342,46 +375,58 @@ Response, success:
         "queue_position_time": null,
         "deleted_at": null,
         "agents": 0,
-        "created_at": "2020-10-21T12:56:09.672Z",
+        "created_at": "2020-08-21T12:51:10.672Z",
         "updated_at": "2020-10-21T12:56:09.672Z",
         "channels": []
       }
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
 
-### Update
-Make HTTP request:
+## Update Department
+Make HTTP **PUT** request:
 
-    PUT https://zchat.zenvia.io/partner/api/departments/:id
+    https://zchat.zenvia.io/partner/api/departments/{id}
 
-With body:
+| Parameter  | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| id | **true** | Id of the department to update | - |
+
+<br> Body Example:
 
     {
-      token: 'hj4h2k3h4k23',
-      agent_ids: [1,22,33],
-      channels: ["chat"],
-      department: {
-        account_id: 1,
-        name: "New Name",
-        description: "A new description"
+      "token": 'YourApiToken',
+      "agent_ids": [1,22,33],
+      "channels": ["chat"],
+      "department": {
+        "account_id": 1,
+        "name": "New Name",
+        "description": "A new description"
       }
     }
-
-Response, success:
+Parameter | Type | Required | Description | Default Attributes |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+agent_ids | array | **false** | List of agent's id for this department | - |
+channels | array | **false** | List of channels for this department | "chat", "video", "voice" |
+department | object | **true** | The department data | { "account_id", "name", "description" } |
+account_id | integer | **true** | Account id for this department | - |
+name | string | **false** | Name of the department | - |
+description | string | **false** | Description of the department | - |
+<br> Success Response Example:
 
     {
-      status: 200,
-      success: true,
-      department: {
+      "status": 200,
+      "success": true,
+      "department": {
         "active": true,
-        "description": "A new description",
+        "description": "New description",
         "id": 1,
         "name": "New Name",
         "queue": true,
@@ -390,17 +435,16 @@ Response, success:
         "queue_position_time": null,
         "deleted_at": null,
         "agents": 0,
-        "created_at": "2020-10-21T12:56:09.672Z",
+        "created_at": "2020-08-21T12:51:10.672Z",
         "updated_at": "2020-10-21T12:56:09.672Z",
         "channels": []
       }
     }
 
-In case of errors:
+Error Response:
 
     {
-      status: 200,
-      success: false,
-      errors: "Invalid token"
+      "status": 200,
+      "success": false,
+      "errors": "Error description here"
     }
-

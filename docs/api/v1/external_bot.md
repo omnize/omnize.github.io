@@ -1,50 +1,9 @@
 # External bot
-To activate external bot contact suport
+To activate external bot, please, contact suport.
 
-```
-
-## Enable and update external_bot
-make **PUT** HTTP request:
-```
-http://partner.omnize.com/api/v1/departments/{department_id}
-```
-body:
-
-Parameter | Type | Required | Valid Attribute |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your partner token |
-department | object | **true** | {"has_external_bot", "external_bot_url"} |
-
-Example:
-```
-{
-  "token": ".......",
-  "department": {
-    "external_bot_url": "http://.....",
-    "has_external_bot": true
-  }
-}
-```
-Valid Response:
-```
-{
-  "success": true,
-  "status": 200,
-  "data": {...}
-}
-```
-Error Response:
-```
-{
-    "success": false,
-    "errors": "Invalid token"
-}
-```
-
-
-## Make interaction
-#### Start widget, select a department with bot and click on "Chat"
-Will receive a **POST** on bot endpoint with body:
+## Create an Interaction
+### Start widget, select a department with an enabled bot and click on "Chat"
+It will receive a HTTP **POST** request at the bot endpoint with body:
 
 Parameter | Type | Value |
 ------------ | ------------- | ------------- |
@@ -61,18 +20,27 @@ Example:
 }
 ```
 
-#### Accept
-make **PUT** HTTP request:
+## Accept
+Make HTTP **PUT** request:
 ```
  https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/accept
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
 
-Parameter | Type | Required | Valid Attribute |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
+<br> Body Example: 
+```
+{
+  "token": "YourApiToken"
+}
+```
 
-Valid Response:
+Parameter | Type | Required | description | Default Attribute |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | -|
+
+Success Response:
 ```
 {
   "message": "Message received successfully",
@@ -87,18 +55,27 @@ Error Response:
 }
 ```
 
-#### Finish
-make **PUT** HTTP request:
+### Finish
+Make HTTP **PUT** request:
 ```
  https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/finish
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
 
-Parameter | Type | Required | Valid Attribute |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
+<br> Body Example: 
+```
+{
+  "token": "YourApiToken"
+}
+```
 
-Valid Response:
+Parameter | Type | Required | description | Default Attribute |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | -|
+
+Success Response:
 ```
 {
   "message": "Message received successfully",
@@ -113,19 +90,29 @@ Error Response:
 }
 
 ```
-#### Transfer
-make **PUT** HTTP request:
+### Transfer
+Make HTTP **PUT** request:
 ```
  https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/transfer
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-department_id | integer | false | any active department_id from your account **(null will be transferred to the department that the interaction started)** |
+<br> Body Example: 
+```
+{
+  "token": "YourApiToken",
+  "department_id": 9999
+}
+```
 
-Valid Response:
+Parameter | Type | Required | Description | Default Attribute |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+department_id | integer | **false** | Id of an active department **(null will be transferred to the department that the interaction started)** | - |
+
+Success Response:
 ```
 {
   "message": "Message received successfully",
@@ -140,40 +127,38 @@ Error Response:
 }
 ```
 
-#### Send message
-make **POST** HTTP request:
+### Send message
+Make HTTP **POST** request:
 ```
  https://zchat.zenvia.io/core/api/v1/bot/{interaction_hash}/message
 ```
-body:
+| Parameter | Required  | Description | Default Attributes |
+| ------------ | ------------ | ------------ | ------------ |
+| interaction_hash | **true** | Unique identification for the interaction (UUID) | - |
 
-Parameter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-token | string | **true** | your clientSdk token |
-content | string | **true** | any string |
-content_type | string | false | text, image, video, audio, file **(null will be saved as text)** |
-attachment | object | false | { "url", "size"} |
-
-
-Attachment Paramenter | Type | Required | Valid Attributes |
------------- | ------------- | ------------- | ------------- |
-url | string | **true** | valid url |
-size | string | false | any string |
-
-Example:
+<br> Body Example: 
 ```
 {
-  "token": "y0urC1lientT0ken",
-  "content": "your message here",
+  "token": "YourAPIToken",
+  "content": "your message",
   "content_type": "image",
   "attachment": {
-    "url": "https://omz-logos.s3.amazonaws.com/logo_omz.png",
+    "url": "https://file-address.example.com/logo.png",
     "size": "1.0MB"
   }
 }
 ```
 
-Valid Response:
+Parameter | Type | Required | Description | Default Attribute |
+------------ | ------------- | ------------- | ------------- | ------------- |
+token | string | **true** | Your API token | - |
+content | string | **true** | Message content | - |
+content_type | string | **false** | Type of the content | audio, image, text, video, file, **(null will be saved as text)** |
+attachment | object | **false**  | Information about the file attachment | { "url", "size"} |
+url | string | **false** |  File URL (except for "text" type message) | - | 
+size | string | **false**  | File size | - |
+
+Success Response:
 ```
 {
   "message": "Message received successfully",
@@ -188,17 +173,17 @@ Error Response:
 }
 ```
 
-#### When client send a message
-Will receive a **POST** on endpoint with body:
+### When client send a message
+It will receive a HTTP **POST** request at the bot endpoint with body:
 
-Parameter | Type | Value |
+Parameter | Description | Default Value
 ------------ | ------------- | ------------- |
-type | string | new_message |
-interaction_hash | string | uuid |
-content | string | any string |
-content_type | string | text, image, video, audio or file |
+type | Type of request | new_message
+interaction_hash | Unique id for the interaction (uuid) |
+content | Content of the message |
+content_type | Message content type | text, image, video, audio or file |
 
-Example:
+Body Example:
 ```
 {
   "type": "new_message",
@@ -208,15 +193,15 @@ Example:
 }
 ```
 
-#### When client finishes the interaction
-Will receive a **POST** on endpoint with body:
+### When client finishes the interaction
+It will receive a HTTP **POST** request at the bot endpoint with body:
 
-Parameter | Type | Value |
+Parameter | Description | Default Value |
 ------------ | ------------- | ------------- |
-type | string | finished_interaction |
-interaction_hash | string | uuid |
+type | Type of request | finished_interaction |
+interaction_hash | Unique id for the interaction (uuid) |
 
-Example:
+Body Example:
 ```
 {
   "type": "finished_interaction",

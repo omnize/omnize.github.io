@@ -1,40 +1,32 @@
-#### Form Fields
-
-Make **GET** HTTP Request:
+# Form Fields API
+To get the access token, go to:
 ```
-https://services.omnize.com.br/api/v1/form_fields?token={yourClientSdkToken}
+https://zchat-admin.zenvia.com
+```
+Then go to:
+```
+Menu > Settings > Integrations > API
+```
+Click on 'Generate Token' to obtain a new one.
+## List Form Fields
+Make HTTP **GET** Request:
+```
+https://zchat.zenvia.io/api/external/form_fields?token={yourAPIToken}
 ```
 
-| Parameter  | Type  | Required  |  Valid Attributes |
+| Parameter  | Required  | Description | Default Attributes |
 | ------------ | ------------ | ------------ | ------------ |
-| token | string | **true** | your clientSdk token |
+| token | **true** | Your API token | - |
 
-
-Response
-
-| Field  | Type  |  Usage |
-| ------------ | ------------ | ------------ |
-| id | integer | internal use |
-| name | string | name of field |
-| label | string | label of field that shows on screen |
-| is_required | boolean | required field to create or update |
-| is_unique | boolean | unique field to search |
-| belongs_to_customer | boolean | customer field |
-| belongs_to_collection | boolean | collection field |
-| label_updatable | boolean | agent can edit label |
-| value_updatable | boolean | agent can edit value |
-| showable | boolean | field shows on screen |
-
-
-Response example:
+Success Response Example:
 ```
 {
   "status": 200,
   "form_fields": [
     {
-      "id": 124585,
+      "id": 9999,
       "name": "main_identifier",
-      "label": "Nome",
+      "label": "Name",
       "is_required": true,
       "is_unique": false,
       "type": "string",
@@ -46,26 +38,12 @@ Response example:
       "showable": true
     },
     {
-      "id": 124580,
+      "id": 8888,
       "name": "channel_phone",
-      "label": "Telefone",
+      "label": "Telephone",
       "is_required": true,
       "is_unique": true,
       "type": "phone",
-      "is_multiple": true,
-      "belongs_to_customer": true,
-      "belongs_to_collection": false,
-      "label_updatable": true,
-      "value_updatable": true,
-      "showable": true
-    },
-    {
-      "id": 124586,
-      "name": "channel_email",
-      "label": "Email",
-      "is_required": false,
-      "is_unique": true,
-      "type": "email",
       "is_multiple": true,
       "belongs_to_customer": true,
       "belongs_to_collection": false,
@@ -76,7 +54,22 @@ Response example:
   ]
 }
 ```
-Error Response:
+| Response Parameter   |  Description |
+| ------------ | ------------ |
+| id | Unique id |
+| name | Name of the field |
+| label | Name of the field that shows on screen |
+| is_required | Required field for creating or updating |
+| is_unique | Unique field, can be used for searching |
+| type | Field data type |
+| is_multiple | Allows more than one |
+| belongs_to_customer | Customer field |
+| belongs_to_collection | Collection field |
+| label_updatable | Agent can edit label |
+| value_updatable | Agent can edit value |
+| showable | Field shows on screen |
+
+<br> Error Response:
 ```
 {
   "status": 404,
